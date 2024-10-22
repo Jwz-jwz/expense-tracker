@@ -1,4 +1,4 @@
-import { Loading } from "./components/Loading";
+import { Loading } from "@/components/Loading";
 import SignInPage from "./sign-in/page";
 
 export default function Home() {

@@ -1,5 +1,5 @@
-import { AddRecord } from "@/app/components/AddRecord";
-import { PlusIcon } from "../svg/PlusIcon";
+import { PlusIcon } from "@/svg/PlusIcon";
+import { AddRecord } from "./AddRecord";
 
 export const Header = () => {
   return (
