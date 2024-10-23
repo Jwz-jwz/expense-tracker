@@ -2,7 +2,7 @@
 
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
 
-export const AddRecord = () => {
+export const AddRecord = ({ text }) => {
   return (
     <div>
       <button
@@ -10,7 +10,7 @@ export const AddRecord = () => {
         onClick={() => document.getElementById("my_modal_1").showModal()}
       >
         <WhitePlusIcon />
-        <p className="text-6 leading-4 font-[400] text-white">Record</p>
+        <p className="text-6 leading-4 font-[400] text-white">{text}</p>
       </button>
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">

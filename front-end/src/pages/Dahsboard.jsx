@@ -1,30 +1,21 @@
-import { HeroDashboard } from "@/components/dashboard/Hero";
-import { Header } from "@/components/Header";
-import { WhiteLogo } from "@/svg/WhiteLogo";
+"use client";
 
-export const Dashboard = () => {
+import { ChartHero } from "@/components/dashboard/CHart";
+import { HeroDashboard } from "@/components/dashboard/Hero";
+import { Lastrecord } from "@/components/dashboard/LastRecor";
+import { Header } from "@/components/Header";
+
+export const Dashboard = ({ dashboard, records, text }) => {
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <Header />
-      {/* <div
-        style={{
-          backgroundImage: `url(bgcard.png)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className="w-[384px] h-[216px] bg-[#0166FF] mt-[50px] rounded-[18px] flex justify-between"
-      >
-        <div className="mt-8 ml-8">
-          <WhiteLogo />
-          <div className="mt-[66px]">
-            <p>Cash</p>
-            <p className="te-white text-[24px] font-[600] leading-8">
-              10,000,000,000
-            </p>
-          </div>
-        </div>
-      </div> */}
-      <HeroDashboard />
+    <div>
+      <div className="w-full flex flex-col justify-center items-center">
+        <Header dashboard={true} records={false} />
+      </div>
+      <div className="w-full flex flex-col justify-center items-center bg-[#F3F4F6] gap-6 pb-[40px]">
+        <HeroDashboard />
+        <ChartHero />
+        <Lastrecord />
+      </div>
     </div>
   );
 };

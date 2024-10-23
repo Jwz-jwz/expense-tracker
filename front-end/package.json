@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "cart.js": "^0.0.0",
+    "chart.js": "^4.4.5",
     "daisyui": "^4.12.13",
     "next": "15.0.0",
     "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "19.0.0-rc-65a56d0e-20241020"
   },
   "devDependencies": {
