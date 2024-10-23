@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "cart.js": "^0.0.0",
     "chart.js": "^4.4.5",
     "daisyui": "^4.12.13",
     "next": "15.0.0",
