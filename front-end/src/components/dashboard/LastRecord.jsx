@@ -13,7 +13,7 @@ export const Lastrecord = () => {
             <p className="text-[16px] font-[400] leading-6">
               Lending & Renting
             </p>
-            <p className="text-[12px] font-[400] leading-6 text-[#6B7280]">
+            <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
               3 hours ago
             </p>
           </div>
@@ -30,7 +30,7 @@ export const Lastrecord = () => {
             <p className="text-[16px] font-[400] leading-6">
               Lending & Renting
             </p>
-            <p className="text-[12px] font-[400] leading-6 text-[#6B7280]">
+            <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
               3 hours ago
             </p>
           </div>
@@ -47,7 +47,7 @@ export const Lastrecord = () => {
             <p className="text-[16px] font-[400] leading-6">
               Lending & Renting
             </p>
-            <p className="text-[12px] font-[400] leading-6 text-[#6B7280]">
+            <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
               3 hours ago
             </p>
           </div>
@@ -64,7 +64,7 @@ export const Lastrecord = () => {
             <p className="text-[16px] font-[400] leading-6">
               Lending & Renting
             </p>
-            <p className="text-[12px] font-[400] leading-6 text-[#6B7280]">
+            <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
               3 hours ago
             </p>
           </div>
@@ -81,7 +81,7 @@ export const Lastrecord = () => {
             <p className="text-[16px] font-[400] leading-6">
               Lending & Renting
             </p>
-            <p className="text-[12px] font-[400] leading-6 text-[#6B7280]">
+            <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
               3 hours ago
             </p>
           </div>

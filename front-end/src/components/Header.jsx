@@ -1,28 +1,31 @@
 import { PlusIcon } from "@/svg/PlusIcon";
 import { AddRecord } from "./AddRecord";
+import Link from "next/link";
 
 export const Header = ({ dashboard, records }) => {
   return (
     <div className="w-[1200px] flex justify-between mt-5 items-center mb-5">
       <div className="flex gap-6">
         <PlusIcon />
-        <button
-          className={`text-6 leading-4 ${
+        <Link
+          href="/dashboard"
+          className={`text-6 leading-4 flex items-center ${
             dashboard ? "font-[600]" : "font-[400]"
           } `}
         >
           Dashboard
-        </button>
-        <button
-          className={`text-6 leading-4 ${
+        </Link>
+        <Link
+          href="/records"
+          className={`text-6 leading-4 flex items-center ${
             records ? "font-[600]" : "font-[400]"
           }`}
         >
           Records
-        </button>
+        </Link>
       </div>
-      <div className="flex gap-6">
-        <AddRecord text={"Record"} />
+      <div className="flex items-center gap-6">
+        <AddRecord />
         <img
           className="w-[40px] h-[40px] rounded-full"
           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"

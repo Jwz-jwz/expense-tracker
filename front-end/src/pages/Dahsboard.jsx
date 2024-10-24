@@ -1,11 +1,11 @@
 "use client";
 
-import { ChartHero } from "@/components/dashboard/CHart";
-import { HeroDashboard } from "@/components/dashboard/Hero";
-import { Lastrecord } from "@/components/dashboard/LastRecor";
+import { ChartHero } from "@/components/dashboard/ChartHero";
+import { HeroDashboard } from "@/components/dashboard/HeroDashboard";
+import { Lastrecord } from "@/components/dashboard/LastRecord";
 import { Header } from "@/components/Header";
 
-export const Dashboard = ({ dashboard, records, text }) => {
+export const Dashboard = () => {
   return (
     <div>
       <div className="w-full flex flex-col justify-center items-center">
