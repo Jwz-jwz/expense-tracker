@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
+import { CategoryArrow } from "@/svg/CategoryArrow";
+import { AddCategory } from "./records/AddCategory";
 
 export const AddRecord = ({ expense }) => {
   const [isClicked, setIsClicked] = useState(true);
@@ -22,7 +24,7 @@ export const AddRecord = ({ expense }) => {
       </button>
       <dialog id="my_modal_3" className="modal ">
         <div className="bg-white rounded-xl p-0 w-[792px]">
-          <div className="w-[792px] flex items-center justify-between h-[50px] border-b border-b-[#E2E8F0] py-[24px] px-[30px]">
+          <div className=" flex items-center justify-between h-[50px] border-b border-b-[#E2E8F0] py-[24px] px-[30px]">
             <h3 className="text-[20px] leading-7 font-[600]">Add record</h3>
             <form
               method="dialog"
@@ -66,11 +68,34 @@ export const AddRecord = ({ expense }) => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <p className="text-[16px] font-[400] leading-6">Category</p>
-                  <select className="select select-bordered w-full h-[48px] rounded-[8px] bg-[#F3F4F6]">
-                    <option className="text-[#94A3B8]">Choose</option>
-                    <option>Han Solo</option>
-                    <option>Greedo</option>
-                  </select>
+                  {/* Endees category choose hiij baigaa heseg */}
+                  <div>
+                    <button
+                      className="btn w-full bg-[#F3F4F6] border border-[#D1D5DB] flex justify-between "
+                      onClick={() =>
+                        document.getElementById("choose_category").showModal()
+                      }
+                    >
+                      <p className="text-[#94A3B8] text-[16px] font-[400] leading-6 ">
+                        Choose
+                      </p>
+                      <CategoryArrow />
+                    </button>
+
+                    <dialog
+                      id="choose_category"
+                      className="modal w-[375px] top-[109px] left-[730px]"
+                    >
+                      <div className="modal-box">
+                        <AddCategory />
+                        <p className="border-b border-b-[#E2E8F0] w-full"></p>
+                      </div>
+                      <form method="dialog" className="modal-backdrop">
+                        <button>close</button>
+                      </form>
+                    </dialog>
+                  </div>
+                  {/* ene hurtel */}
                 </div>
                 <div className="flex  justify-between">
                   <div className="flex flex-col gap-1 w-[168px]">
