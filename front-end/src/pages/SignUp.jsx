@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 export const SignUpPage = () => {
   const router = useRouter();
