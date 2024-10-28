@@ -4,33 +4,72 @@ import { BACKEND_ENDPOINT } from "@/constants/constant";
 import { LogoIcon } from "@/svg/LogoIcon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
 
 export const SignUpPage = () => {
   const router = useRouter();
-  const handleOnSubmit = async (event) => {
-    event.preventDefault();
+  useState;
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const userData = {
-      name: event.target.name.value,
-      password: event.target.password.value,
-      email: event.target.email.value,
-    };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      pass: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required(),
+      email: Yup.string().email("Invalid email address").required("Required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Required"),
+      pass: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match") // Add this line
+        .required("Required"),
+    }),
+    onSubmit: async (values) => {
+      setErrorMessage("");
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    };
+      try {
+        const response = await fetch(`${BACKEND_ENDPOINT}/sign-up`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
 
-    const response = await fetch(`${BACKEND_ENDPOINT}/sign-up-page`, options);
-    const data = await response.json();
-    if (data.success == true) {
-      alert("Successfully signed up. Please log-in");
-      router.push("/");
+        const data = await response.json();
+        console.log(data);
+
+        if (response.ok) {
+          toast.success("Login successful!");
+          localStorage.setItem("isLoggedIn", "true");
+          router.push("/dashboard");
+        }
+        if (data.message == "password not match") {
+          toast.warning("Password not match. Try again");
+        } else {
+          setErrorMessage(data.message || "Invalid credentials");
+          toast.error("Please sign up");
+          router.push("/sign-up");
+        }
+      } catch (error) {
+        setErrorMessage("Network error");
+      }
+    },
+  });
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      toast.success("you already login");
+      router.push("/dashboard");
     }
-  };
+  }, [router]);
   return (
     <div className="w-full h-[1200px] flex">
       <div className="w-[50%] h-full flex justify-center">
@@ -45,33 +84,45 @@ export const SignUpPage = () => {
             </p>
           </div>
           <form
-            onSubmit={handleOnSubmit}
+            onSubmit={formik.handleSubmit}
             className="w-full flex flex-col gap-[16px]"
           >
             <input
+              type="text"
               name="name"
               className="rounded-lg border border-[#D1D5DB] px-[16px] py-[12px] bg-[#F3F4F6]"
               placeholder="Name"
-              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.name}
             />
             <input
+              type="email"
               name="email"
               className="rounded-lg border border-[#D1D5DB] px-[16px] py-[12px] bg-[#F3F4F6]"
               placeholder="Email"
-              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.email}
             />
             <input
               name="password"
               className="rounded-lg border border-[#D1D5DB] px-[16px] py-[12px] bg-[#F3F4F6]"
               placeholder="Password"
               type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
             />
             <input
+              name="pass"
               className="rounded-lg border border-[#D1D5DB] px-[16px] py-[12px] bg-[#F3F4F6]"
               placeholder="Re-password"
               type="password"
+              onChange={formik.handleChange}
+              value={formik.values.pass}
             />
-            <button className="rounded-[20px] border text-white border-[#D1D5DB] px-[16px] py-[12px] bg-[#0166FF]">
+            <button
+              type="submit"
+              className="rounded-[20px] border text-white border-[#D1D5DB] px-[16px] py-[12px] bg-[#0166FF]"
+            >
               Sign up
             </button>
           </form>
