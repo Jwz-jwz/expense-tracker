@@ -32,8 +32,23 @@ import {
 } from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
+import { useEffect, useRef, useState } from "react";
 
 export const AddCategory = () => {
+  const [bgColor, setBgColor] = useState("");
+  const buttonBgColor = useRef(null);
+  const handleBgColor = () => {
+    if (buttonBgColor.current) {
+      const currBgColor = window.getComputedStyle(
+        buttonRef.current
+      ).backgroundColor;
+      setBgColor(currBgColor);
+    }
+  };
+  console.log(bgColor);
+  useEffect(() => {
+    handleBgColor();
+  }, []);
   return (
     <div>
       <button
@@ -102,13 +117,34 @@ export const AddCategory = () => {
                     </div>
                     <p className="border-b border-b-[#E2E8F0] w-full"></p>
                     <div className="grid grid-cols-7 gap-4">
-                      <p className="w-[24px] h-[24px] bg-[#0166FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#01B3FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#41CC00] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#F9D100] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#FF7B01] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#AE01FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#FF0101] rounded-[50%]"></p>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#0166FF] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#01B3FF] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#41CC00] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#F9D100] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#FF7B01] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#AE01FF] rounded-[50%]"
+                      ></button>
+                      <button
+                        onClick={handleBgColor}
+                        className="w-[24px] h-[24px] bg-[#FF0101] rounded-[50%]"
+                      ></button>
                     </div>
                   </div>
                   <form method="dialog" className="modal-backdrop">
