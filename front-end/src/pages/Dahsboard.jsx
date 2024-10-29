@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartHero } from "@/components/dashboard/ChartHero";
+import { ChartHero } from "@/components/dashboard/DoughnutChart";
 import { HeroDashboard } from "@/components/dashboard/HeroDashboard";
 import { Lastrecord } from "@/components/dashboard/LastRecord";
 import { Header } from "@/components/Header";
