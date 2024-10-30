@@ -34,6 +34,20 @@ import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 
 export const AddCategory = () => {
+  const [bgColor, setBgColor] = useState("");
+  const buttonBgColor = useRef(null);
+  const handleBgColor = () => {
+    if (buttonBgColor.current) {
+      const currBgColor = window.getComputedStyle(
+        buttonRef.current
+      ).backgroundColor;
+      setBgColor(currBgColor);
+    }
+  };
+  console.log(bgColor);
+  useEffect(() => {
+    handleBgColor();
+  }, []);
   return (
     <div>
       <button
