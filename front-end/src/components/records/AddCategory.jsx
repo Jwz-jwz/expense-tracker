@@ -34,20 +34,27 @@ import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 
 export const AddCategory = () => {
-  const [bgColor, setBgColor] = useState("");
-  const buttonBgColor = useRef(null);
-  const handleBgColor = () => {
-    if (buttonBgColor.current) {
-      const currBgColor = window.getComputedStyle(
-        buttonRef.current
-      ).backgroundColor;
-      setBgColor(currBgColor);
-    }
-  };
-  console.log(bgColor);
-  useEffect(() => {
-    handleBgColor();
-  }, []);
+  const colors = [
+    "#0166FF",
+    "#01B3FF",
+    "#41CC00",
+    "#F9D100",
+    "#FF7B01",
+    "#AE01FF",
+    "#FF0101",
+  ];
+  const icons = [
+    { name: "HomeIcon", icon: <HomeIcon color={"#343330"} /> },
+    { name: "SecondIcon", icon: <SecondIcon color={"#343330"} /> },
+    { name: "ThirdIcon", icon: <ThirdIcon color={"#343330"} /> },
+    { name: "FourthIcon", icon: <FourthIcon color={"#343330"} /> },
+    { name: "FifthIcon", icon: <FifthIcon color={"#343330"} /> },
+    { name: "Sixthcon", icon: <Sixthcon color={"#343330"} /> },
+    { name: "SeventhIcon", icon: <SeventhIcon color={"#343330"} /> },
+    { name: "EightIcon", icon: <EightIcon color={"#343330"} /> },
+    { name: "NinethIcon", icon: <NinethIcon color={"#343330"} /> },
+  ];
+
   return (
     <div>
       <button
@@ -63,7 +70,7 @@ export const AddCategory = () => {
             <h3 className="font-bold text-lg">Add Category</h3>
             <form method="dialog">
               <button className="top-1">✕</button>
-            </form>
+            </form>  
           </div>
           <div className="py-[24px] px-[20px] flex flex-col gap-8">
             <div className="flex justify-between w-[446px]">
@@ -83,15 +90,15 @@ export const AddCategory = () => {
                 >
                   <div className=" w-[312px] modal-box flex flex-col gap-6">
                     <div className="grid grid-cols-6 grid-rows-5 gap-6 ">
-                      <HomeIcon />
-                      <SecondIcon />
-                      <ThirdIcon />
-                      <FourthIcon />
-                      <FifthIcon />
-                      <Sixthcon />
-                      <SeventhIcon />
-                      <EightIcon />
-                      <NinethIcon />
+                      <HomeIcon color={"#343330"} />
+                      <SecondIcon color={"#343330"} />
+                      <ThirdIcon color={"#343330"} />
+                      <FourthIcon color={"#343330"} />
+                      <FifthIcon color={"#343330"} />
+                      <Sixthcon color={"#343330"} />
+                      <SeventhIcon color={"#343330"} />
+                      <EightIcon color={"#343330"} />
+                      <NinethIcon color={"#343330"} />
                       <TenthIcon />
                       <EleventhIcon />
                       <TwelfthIcon />
@@ -100,7 +107,7 @@ export const AddCategory = () => {
                       <FifteenthIcon />
                       <SixteenthIcon />
                       <SeventeenthIcon />
-                      <EighteenthIcon />
+                      <EighteenthIcon color={"#343330"} />
                       <NineteenthIcon />
                       <TwentiethIcon />
                       <TwentyFirstIcon />
@@ -116,13 +123,13 @@ export const AddCategory = () => {
                     </div>
                     <p className="border-b border-b-[#E2E8F0] w-full"></p>
                     <div className="grid grid-cols-7 gap-4">
-                      <p className="w-[24px] h-[24px] bg-[#0166FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#01B3FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#41CC00] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#F9D100] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#FF7B01] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#AE01FF] rounded-[50%]"></p>
-                      <p className="w-[24px] h-[24px] bg-[#FF0101] rounded-[50%]"></p>
+                      <button className="w-[24px] h-[24px] bg-[#0166FF] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#01B3FF] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#41CC00] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#F9D100] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#FF7B01] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#AE01FF] rounded-[50%]"></button>
+                      <button className="w-[24px] h-[24px] bg-[#FF0101] rounded-[50%]"></button>
                     </div>
                   </div>
                   <form method="dialog" className="modal-backdrop">
