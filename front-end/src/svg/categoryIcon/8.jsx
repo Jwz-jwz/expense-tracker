@@ -1,4 +1,4 @@
-export const EightIcon = (color) => {
+export const EightIcon = ({ color }) => {
   return (
     <div className="flex justify-center items-center">
       <svg

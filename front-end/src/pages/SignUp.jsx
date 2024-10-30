@@ -44,9 +44,8 @@ export const SignUpPage = () => {
         });
 
         const data = await response.json();
-        console.log(data);
 
-        if (response.ok) {
+        if (response.status) {
           toast.success("Login successful!");
           localStorage.setItem("isLoggedIn", "true");
           router.push("/dashboard");

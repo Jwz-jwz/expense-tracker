@@ -32,16 +32,31 @@ import {
 } from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
+import { useState } from "react";
 
 export const AddCategory = () => {
+  const [bgColor, setBgColor] = useState("");
+  const [bgIcon, setBgIcon] = useState({});
+
+  const handleColor = (id) => {
+    return setBgColor(id);
+  };
+  const handleIcon = (icon) => {
+    return setBgIcon(icon);
+  };
+
+  console.log("bgColor ni shuu", bgColor);
+
+  console.log("bgIcon shuu", bgIcon);
+
   const colors = [
-    "#0166FF",
-    "#01B3FF",
-    "#41CC00",
-    "#F9D100",
-    "#FF7B01",
-    "#AE01FF",
-    "#FF0101",
+    { id: 1, color: "#0166FF" },
+    { id: 2, color: "#01B3FF" },
+    { id: 3, color: "#41CC00" },
+    { id: 4, color: "#F9D100" },
+    { id: 5, color: "#FF7B01" },
+    { id: 6, color: "#AE01FF" },
+    { id: 7, color: "#FFFF0101B01" },
   ];
   const icons = [
     { name: "HomeIcon", icon: <HomeIcon color={"#343330"} /> },
@@ -53,6 +68,30 @@ export const AddCategory = () => {
     { name: "SeventhIcon", icon: <SeventhIcon color={"#343330"} /> },
     { name: "EightIcon", icon: <EightIcon color={"#343330"} /> },
     { name: "NinethIcon", icon: <NinethIcon color={"#343330"} /> },
+    { name: "TenthIcon", icon: <TenthIcon color={"#343330"} /> },
+    { name: "EleventhIcon", icon: <EleventhIcon color={"#343330"} /> },
+    { name: "TwelfthIcon", icon: <TwelfthIcon color={"#343330"} /> },
+    { name: "ThirteenthIcon", icon: <ThirteenthIcon color={"#343330"} /> },
+    { name: "Fourteenth", icon: <Fourteenth color={"#343330"} /> },
+    { name: "FifteenthIcon", icon: <FifteenthIcon color={"#343330"} /> },
+    { name: "SixteenthIcon", icon: <SixteenthIcon color={"#343330"} /> },
+    { name: "SeventeenthIcon", icon: <SeventeenthIcon color={"#343330"} /> },
+    { name: "EighteenthIcon", icon: <EighteenthIcon color={"#343330"} /> },
+    { name: "NineteenthIcon", icon: <NineteenthIcon color={"#343330"} /> },
+    { name: "TwentiethIcon", icon: <TwentiethIcon color={"#343330"} /> },
+    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon color={"#343330"} /> },
+    { name: "TwentySecondIcon", icon: <TwentySecondIcon color={"#343330"} /> },
+    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon color={"#343330"} /> },
+    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon color={"#343330"} /> },
+    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon color={"#343330"} /> },
+    { name: "TwentySixthIcon", icon: <TwentySixthIcon color={"#343330"} /> },
+    {
+      name: "TwentySeventhIcon",
+      icon: <TwentySeventhIcon color={"#343330"} />,
+    },
+    { name: "TwentyEighticon", icon: <TwentyEighticon color={"#343330"} /> },
+    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon color={"#343330"} /> },
+    { name: "ThirtiethIcon", icon: <ThirtiethIcon color={"#343330"} /> },
   ];
 
   return (
@@ -70,7 +109,7 @@ export const AddCategory = () => {
             <h3 className="font-bold text-lg">Add Category</h3>
             <form method="dialog">
               <button className="top-1">✕</button>
-            </form>  
+            </form>
           </div>
           <div className="py-[24px] px-[20px] flex flex-col gap-8">
             <div className="flex justify-between w-[446px]">
@@ -90,46 +129,32 @@ export const AddCategory = () => {
                 >
                   <div className=" w-[312px] modal-box flex flex-col gap-6">
                     <div className="grid grid-cols-6 grid-rows-5 gap-6 ">
-                      <HomeIcon color={"#343330"} />
-                      <SecondIcon color={"#343330"} />
-                      <ThirdIcon color={"#343330"} />
-                      <FourthIcon color={"#343330"} />
-                      <FifthIcon color={"#343330"} />
-                      <Sixthcon color={"#343330"} />
-                      <SeventhIcon color={"#343330"} />
-                      <EightIcon color={"#343330"} />
-                      <NinethIcon color={"#343330"} />
-                      <TenthIcon />
-                      <EleventhIcon />
-                      <TwelfthIcon />
-                      <ThirteenthIcon />
-                      <Fourteenth />
-                      <FifteenthIcon />
-                      <SixteenthIcon />
-                      <SeventeenthIcon />
-                      <EighteenthIcon color={"#343330"} />
-                      <NineteenthIcon />
-                      <TwentiethIcon />
-                      <TwentyFirstIcon />
-                      <TwentySecondIcon />
-                      <TwentyThirdIcon />
-                      <TwentyFourthIcon />
-                      <TwentyFifthIcon />
-                      <TwentySixthIcon />
-                      <TwentySeventhIcon />
-                      <TwentyEighticon />
-                      <TwentyNinethIcon />
-                      <ThirtiethIcon />
+                      {icons.map((icon, index) => {
+                        return (
+                          <button
+                            onClick={() => {
+                              handleIcon(icon.name);
+                            }}
+                            key={index}
+                          >
+                            {icon.icon}
+                          </button>
+                        );
+                      })}
                     </div>
                     <p className="border-b border-b-[#E2E8F0] w-full"></p>
                     <div className="grid grid-cols-7 gap-4">
-                      <button className="w-[24px] h-[24px] bg-[#0166FF] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#01B3FF] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#41CC00] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#F9D100] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#FF7B01] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#AE01FF] rounded-[50%]"></button>
-                      <button className="w-[24px] h-[24px] bg-[#FF0101] rounded-[50%]"></button>
+                      {colors.map((color, index) => {
+                        return (
+                          <button
+                            onClick={() => {
+                              handleColor(color.id);
+                            }}
+                            key={index}
+                            className={`w-[24px] h-[24px] bg-[${color.color}]`}
+                          ></button>
+                        );
+                      })}
                     </div>
                   </div>
                   <form method="dialog" className="modal-backdrop">

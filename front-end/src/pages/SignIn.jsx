@@ -37,6 +37,7 @@ export const SignInPage = () => {
         });
 
         const data = await response.json();
+        console.log(response.status);
 
         if (response.ok) {
           toast.success("Login successful!");
@@ -44,8 +45,13 @@ export const SignInPage = () => {
           router.push("/dashboard");
         }
 
-        if (data.message == "password not match") {
+        if (response.status(400)) {
           toast.warning("Password not match. Try again");
+          router.push("/sign-in");
+        }
+        if (response.status(401)) {
+          toast.warning("Password not match. Try again");
+          router.push("/sign-in");
         } else {
           setErrorMessage(data.message || "Invalid credentials");
           toast.error("Please sign up");
