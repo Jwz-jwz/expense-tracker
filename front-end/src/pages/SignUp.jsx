@@ -55,7 +55,7 @@ export const SignUpPage = () => {
         } else {
           setErrorMessage(data.message || "Invalid credentials");
           toast.error("Please sign up");
-          router.push("/sign-up");
+          router.push("/sign-up");          
         }
       } catch (error) {
         setErrorMessage("Network error");

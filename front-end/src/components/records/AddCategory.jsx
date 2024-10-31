@@ -56,7 +56,7 @@ export const AddCategory = () => {
     { id: 4, color: "#F9D100" },
     { id: 5, color: "#FF7B01" },
     { id: 6, color: "#AE01FF" },
-    { id: 7, color: "#FFFF0101B01" },
+    { id: 7, color: "#FF0101" },
   ];
   const icons = [
     { name: "HomeIcon", icon: <HomeIcon color={"#343330"} /> },
