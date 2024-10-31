@@ -12,7 +12,7 @@ app.use(cors());
 const port = 8368;
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-app.get("/", (request, response) => {
+app.get("/aaasdsads", (request, response) => {
   response.send("hello tanii GET huselt irlee");
 });
 
@@ -34,6 +34,7 @@ app.post("/sign-in", async (request, response) => {
     response.json({ message: "Internal server error during login user" });
   }
 });
+
 app.post("/sign-up", async (request, response) => {
   const { name, email, password } = request.body;
   //
