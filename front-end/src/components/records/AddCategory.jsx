@@ -33,10 +33,13 @@ import {
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { useState } from "react";
+import { IconArrow } from "./IconArrow";
+import { BACKEND_ENDPOINT } from "@/constants/constant";
 
 export const AddCategory = () => {
   const [bgColor, setBgColor] = useState("");
   const [bgIcon, setBgIcon] = useState({});
+  const [categoryName, setCategoryName] = useState({});
 
   const handleColor = (id) => {
     return setBgColor(id);
@@ -45,8 +48,35 @@ export const AddCategory = () => {
     return setBgIcon(icon);
   };
 
-  console.log("bgColor ni shuu", bgColor);
+  const addCategory = async ({ categoryName, bgColor, bgIcon }) => {
+    try {
+      // event.preventDefault();
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({ category, bgColor, bgIcon }),
+      };
+      const response = await fetch(`${BACKEND_ENDPOINT}/category`, options);
+      const data = await response.JSON();
+      setCategory((prevCategoryName) => [...prevCategoryName, ...data]);
+    } catch (error) {
+      console.log("error");
+    }
+  };
+  const handleInputChange = (event) => {
+    const name = event.target.name;
+    setCategoryName((prevCategoryName) => {
+      return {
+        ...prevCategoryName,
+        [name]: value,
+      };
+    });
+  };
 
+  console.log("bgColor ni shuu", bgColor);
   console.log("bgIcon shuu", bgIcon);
 
   const colors = [
@@ -120,7 +150,7 @@ export const AddCategory = () => {
                     document.getElementById("my_modal_2").showModal()
                   }
                 >
-                  <HomeIcon />
+                  <IconArrow icon={<HomeIcon color={"#343330"} />} />
                   <CategoryArrow />
                 </button>
                 <dialog
@@ -163,12 +193,16 @@ export const AddCategory = () => {
                 </dialog>
               </div>
               <input
+                onChange={handleInputChange}
                 type="text"
                 placeholder="Name"
                 className="input input-bordered w-[350px] bg-[#F3F4F6]"
               />
             </div>
-            <button className="w-ful bg-[#16A34A] text-white rounded-[24px] py-[10px]">
+            <button
+              onClick={addCategory}
+              className="w-ful bg-[#16A34A] text-white rounded-[24px] py-[10px]"
+            >
               Add
             </button>
           </div>
