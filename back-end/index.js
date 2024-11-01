@@ -54,6 +54,26 @@ app.post("/sign-up", async (request, response) => {
   }
 });
 
+app.post("/category", async (request, response) => {
+  const { categoryName, bgColor, bgIcon } = request.body;
+  //
+  try {
+    const existedCategory =
+      await sql`SELECT * FROM category WHERE name=${categoryName}`;
+    if (existedUser.length > 0) {
+      return response.json({ message: "User already exist" });
+    }
+    const newUser = await sql`INSERT INTO users (email, name, password)
+                VALUES(${email}, ${name}, ${password} )
+                RETURNING id, email`;
+
+    response.json({ message: "User successfully created", user: newUser[0] });
+    console.log(response);
+  } catch (error) {
+    response.json({ message: "Internal server error during login user" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`server ajillaj ehelle http://localhost:${port}`);
 });
