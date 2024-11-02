@@ -39,45 +39,43 @@ import { BACKEND_ENDPOINT } from "@/constants/constant";
 export const AddCategory = () => {
   const [bgColor, setBgColor] = useState("");
   const [bgIcon, setBgIcon] = useState({});
-  const [categoryName, setCategoryName] = useState({});
+  const [categoryName, setCategoryName] = useState("");
 
-  const handleColor = (id) => {
-    return setBgColor(id);
-  };
-  const handleIcon = (icon) => {
-    return setBgIcon(icon);
+  const handleColor = (color) => {
+    return setBgColor(color);
   };
 
-  const addCategory = async ({ categoryName, bgColor, bgIcon }) => {
+  const handleIcon = (iconName) => {
+    return setBgIcon(iconName);
+  };
+
+  const handleInputChange = (event) => {
+    setCategoryName(event.target.value);
+  };
+
+  const addCategory = async () => {
     try {
-      // event.preventDefault();
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ category, bgColor, bgIcon }),
+        body: JSON.stringify({ categoryName, bgIcon, bgColor }),
       };
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const response = await fetch(`${BACKEND_ENDPOINT}/category`, options);
       const data = await response.JSON();
-      setCategory((prevCategoryName) => [...prevCategoryName, ...data]);
+      console.log(data.category);
     } catch (error) {
       console.log("error");
     }
   };
-  const handleInputChange = (event) => {
-    const name = event.target.name;
-    setCategoryName((prevCategoryName) => {
-      return {
-        ...prevCategoryName,
-        [name]: value,
-      };
-    });
-  };
 
-  console.log("bgColor ni shuu", bgColor);
-  console.log("bgIcon shuu", bgIcon);
+  // console.log("bgColor ni shuu", bgColor);
+  // console.log("bgIcon shuu", bgIcon);
 
   const colors = [
     { id: 1, color: "#0166FF" },
@@ -163,11 +161,11 @@ export const AddCategory = () => {
                         return (
                           <button
                             onClick={() => {
-                              handleIcon(icon.name);
+                              handleIcon(icon?.name);
                             }}
                             key={index}
                           >
-                            {icon.icon}
+                            {icon?.icon}
                           </button>
                         );
                       })}
@@ -178,10 +176,10 @@ export const AddCategory = () => {
                         return (
                           <button
                             onClick={() => {
-                              handleColor(color.id);
+                              handleColor(color?.color);
                             }}
                             key={index}
-                            className={`w-[24px] h-[24px] bg-[${color.color}]`}
+                            className={`w-[24px] h-[24px] bg-[${color?.color}]`}
                           ></button>
                         );
                       })}
