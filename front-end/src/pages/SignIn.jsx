@@ -45,11 +45,11 @@ export const SignInPage = () => {
           router.push("/dashboard");
         }
 
-        if (response.status(400)) {
-          toast.warning("Password not match. Try again");
-          router.push("/sign-in");
+        if (response.status === 400) {
+          toast.warning("Password or email not found");
+          router.push("/sign-up");
         }
-        if (response.status(401)) {
+        if (response.status === 401) {
           toast.warning("Password not match. Try again");
           router.push("/sign-in");
         } else {

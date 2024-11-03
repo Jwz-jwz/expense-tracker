@@ -35,11 +35,17 @@ import { CategoryArrow } from "@/svg/CategoryArrow";
 import { useState } from "react";
 import { IconArrow } from "./IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
+import Home from "@/app/page";
 
 export const AddCategory = () => {
-  const [bgColor, setBgColor] = useState("");
+  const [bgColor, setBgColor] = useState("#343330");
   const [bgIcon, setBgIcon] = useState({});
   const [categoryName, setCategoryName] = useState("");
+  const [newCategory, setNewCategory] = useState([]);
+  const [defCategory, setDefCategory] = useState([
+    <HomeIcon color={bgColor} />,
+  ]);
+  console.log(newCategory);
 
   const handleColor = (color) => {
     return setBgColor(color);
@@ -63,19 +69,20 @@ export const AddCategory = () => {
         },
         body: JSON.stringify({ categoryName, bgIcon, bgColor }),
       };
+
+      const response = await fetch(`${BACKEND_ENDPOINT}/category`, options);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const response = await fetch(`${BACKEND_ENDPOINT}/category`, options);
-      const data = await response.JSON();
-      console.log(data.category);
+      const data = await response.json();
+
+      setDefCategory(data);
+      setNewCategory((prevCategory) => [...prevCategory, data]);
     } catch (error) {
       console.log("error");
     }
   };
-
-  // console.log("bgColor ni shuu", bgColor);
-  // console.log("bgIcon shuu", bgIcon);
 
   const colors = [
     { id: 1, color: "#0166FF" },
@@ -87,39 +94,39 @@ export const AddCategory = () => {
     { id: 7, color: "#FF0101" },
   ];
   const icons = [
-    { name: "HomeIcon", icon: <HomeIcon color={"#343330"} /> },
-    { name: "SecondIcon", icon: <SecondIcon color={"#343330"} /> },
-    { name: "ThirdIcon", icon: <ThirdIcon color={"#343330"} /> },
-    { name: "FourthIcon", icon: <FourthIcon color={"#343330"} /> },
-    { name: "FifthIcon", icon: <FifthIcon color={"#343330"} /> },
-    { name: "Sixthcon", icon: <Sixthcon color={"#343330"} /> },
-    { name: "SeventhIcon", icon: <SeventhIcon color={"#343330"} /> },
-    { name: "EightIcon", icon: <EightIcon color={"#343330"} /> },
-    { name: "NinethIcon", icon: <NinethIcon color={"#343330"} /> },
-    { name: "TenthIcon", icon: <TenthIcon color={"#343330"} /> },
-    { name: "EleventhIcon", icon: <EleventhIcon color={"#343330"} /> },
-    { name: "TwelfthIcon", icon: <TwelfthIcon color={"#343330"} /> },
-    { name: "ThirteenthIcon", icon: <ThirteenthIcon color={"#343330"} /> },
-    { name: "Fourteenth", icon: <Fourteenth color={"#343330"} /> },
-    { name: "FifteenthIcon", icon: <FifteenthIcon color={"#343330"} /> },
-    { name: "SixteenthIcon", icon: <SixteenthIcon color={"#343330"} /> },
-    { name: "SeventeenthIcon", icon: <SeventeenthIcon color={"#343330"} /> },
-    { name: "EighteenthIcon", icon: <EighteenthIcon color={"#343330"} /> },
-    { name: "NineteenthIcon", icon: <NineteenthIcon color={"#343330"} /> },
-    { name: "TwentiethIcon", icon: <TwentiethIcon color={"#343330"} /> },
-    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon color={"#343330"} /> },
-    { name: "TwentySecondIcon", icon: <TwentySecondIcon color={"#343330"} /> },
-    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon color={"#343330"} /> },
-    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon color={"#343330"} /> },
-    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon color={"#343330"} /> },
-    { name: "TwentySixthIcon", icon: <TwentySixthIcon color={"#343330"} /> },
+    { name: "HomeIcon", icon: <HomeIcon color={bgColor} /> },
+    { name: "SecondIcon", icon: <SecondIcon color={bgColor} /> },
+    { name: "ThirdIcon", icon: <ThirdIcon color={bgColor} /> },
+    { name: "FourthIcon", icon: <FourthIcon color={bgColor} /> },
+    { name: "FifthIcon", icon: <FifthIcon color={bgColor} /> },
+    { name: "Sixthcon", icon: <Sixthcon color={bgColor} /> },
+    { name: "SeventhIcon", icon: <SeventhIcon color={bgColor} /> },
+    { name: "EightIcon", icon: <EightIcon color={bgColor} /> },
+    { name: "NinethIcon", icon: <NinethIcon color={bgColor} /> },
+    { name: "TenthIcon", icon: <TenthIcon color={bgColor} /> },
+    { name: "EleventhIcon", icon: <EleventhIcon color={bgColor} /> },
+    { name: "TwelfthIcon", icon: <TwelfthIcon color={bgColor} /> },
+    { name: "ThirteenthIcon", icon: <ThirteenthIcon color={bgColor} /> },
+    { name: "Fourteenth", icon: <Fourteenth color={bgColor} /> },
+    { name: "FifteenthIcon", icon: <FifteenthIcon color={bgColor} /> },
+    { name: "SixteenthIcon", icon: <SixteenthIcon color={bgColor} /> },
+    { name: "SeventeenthIcon", icon: <SeventeenthIcon color={bgColor} /> },
+    { name: "EighteenthIcon", icon: <EighteenthIcon color={bgColor} /> },
+    { name: "NineteenthIcon", icon: <NineteenthIcon color={bgColor} /> },
+    { name: "TwentiethIcon", icon: <TwentiethIcon color={bgColor} /> },
+    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon color={bgColor} /> },
+    { name: "TwentySecondIcon", icon: <TwentySecondIcon color={bgColor} /> },
+    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon color={bgColor} /> },
+    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon color={bgColor} /> },
+    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon color={bgColor} /> },
+    { name: "TwentySixthIcon", icon: <TwentySixthIcon color={bgColor} /> },
     {
       name: "TwentySeventhIcon",
-      icon: <TwentySeventhIcon color={"#343330"} />,
+      icon: <TwentySeventhIcon color={bgColor} />,
     },
-    { name: "TwentyEighticon", icon: <TwentyEighticon color={"#343330"} /> },
-    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon color={"#343330"} /> },
-    { name: "ThirtiethIcon", icon: <ThirtiethIcon color={"#343330"} /> },
+    { name: "TwentyEighticon", icon: <TwentyEighticon color={bgColor} /> },
+    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon color={bgColor} /> },
+    { name: "ThirtiethIcon", icon: <ThirtiethIcon color={bgColor} /> },
   ];
 
   return (
@@ -148,7 +155,8 @@ export const AddCategory = () => {
                     document.getElementById("my_modal_2").showModal()
                   }
                 >
-                  <IconArrow icon={<HomeIcon color={"#343330"} />} />
+                  {/* <IconArrow icon={defCategory} /> */}
+                  <div>{defCategory[0]}</div>
                   <CategoryArrow />
                 </button>
                 <dialog
@@ -179,7 +187,7 @@ export const AddCategory = () => {
                               handleColor(color?.color);
                             }}
                             key={index}
-                            className={`w-[24px] h-[24px] bg-[${color?.color}]`}
+                            className={`w-8 h-8 rounded-full bg-[${color.color}]`}
                           ></button>
                         );
                       })}
@@ -197,6 +205,15 @@ export const AddCategory = () => {
                 className="input input-bordered w-[350px] bg-[#F3F4F6]"
               />
             </div>
+            <button>
+              {newCategory.map((category) => {
+                return (
+                  <div className="flex gap-[20px]">
+                    <div className="flex">{category?.name}</div>
+                  </div>
+                );
+              })}
+            </button>
             <button
               onClick={addCategory}
               className="w-ful bg-[#16A34A] text-white rounded-[24px] py-[10px]"
