@@ -22,16 +22,20 @@ app.post("/sign-in", async (request, response) => {
   try {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
     if (user.length === 0) {
-      return response.json({ message: "email or password not match" });
+      return response
+        .status(400)
+        .json({ message: "email or password not match" });
     }
 
     if (user[0].password !== password) {
-      return response.json({ message: "password not match" });
+      return response.status(401).json({ message: "password not match" });
     }
 
-    response.json({ message: "Login successfull", user: user[0] });
+    response.status(200).json({ message: "Login successfull", user: user[0] });
   } catch (error) {
-    response.json({ message: "Internal server error during login user" });
+    response
+      .status(500)
+      .json({ message: "Internal server error during login user" });
   }
 });
 
@@ -55,21 +59,21 @@ app.post("/sign-up", async (request, response) => {
 
 app.post("/category", async (request, response) => {
   const { categoryName, bgColor, bgIcon } = request.body;
-  console.log(request.body);
+  console.log("request shuu", request.body);
 
   try {
     const existedCategory =
       await sql`SELECT * FROM category WHERE name=${categoryName}`;
     if (existedCategory.length > 0) {
-      return response.json({ status: 400, message: "Category already exist" });
+      return response.status(400).json({ message: "Category already exist" });
     }
     const newCategory =
       await sql`INSERT INTO category (name, category_icon, icon_color)
                 VALUES(${categoryName}, ${bgIcon}, ${bgColor} )
                 RETURNING *`;
 
-    response.json({ status: 200, category: newCategory[0] });
-    console.log("response ni shuu", response);
+    response.status(201).json(newCategory[0]);
+    console.log("response ni shuu", newCategory[0]);
   } catch (error) {
     response.json({ message: "Internal server error during login user" });
   }
