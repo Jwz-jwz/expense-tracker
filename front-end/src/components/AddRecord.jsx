@@ -4,9 +4,10 @@ import { useState } from "react";
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { AddCategory } from "./records/AddCategory";
-import { AddCategoryTest } from "./records/AddCategoryTest";
 
-export const AddRecord = ({ expense }) => {
+export const AddRecord = ({ categories, colors, icons }) => {
+  console.log(categories);
+
   const [isClicked, setIsClicked] = useState(true);
   const [isColor, setIsColor] = useState(true);
 
@@ -17,11 +18,11 @@ export const AddRecord = ({ expense }) => {
   return (
     <div>
       <button
-        className="h-8 w-[99px] bg-[#0166FF] flex items-center justify-center rounded-[20px] gap-1"
+        className="h-8 w-full bg-[#0166FF] flex items-center justify-center rounded-[20px] gap-1"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         <WhitePlusIcon />
-        <p className="text-[12px] leading-4 font-[400] text-[white]">Record</p>
+        <p className="text-[12px] leading-4 font-[400] text-[white]">Add</p>
       </button>
       <dialog id="my_modal_3" className="modal ">
         <div className="bg-white rounded-xl p-0 w-[792px]">
@@ -70,8 +71,19 @@ export const AddRecord = ({ expense }) => {
                 <div className="flex flex-col gap-1">
                   <p className="text-[16px] font-[400] leading-6">Category</p>
                   {/* Endees category choose hiij baigaa heseg */}
-                  <div>
-                    <button
+
+                  <select className="select select-bordered w-full bg-[#F3F4F6]">
+                    <option value="" defaultValue>
+                      Choose category
+                    </option>
+                    {categories &&
+                      categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                  </select>
+                  {/* <button
                       className="btn w-full bg-[#F3F4F6] border border-[#D1D5DB] flex justify-between "
                       onClick={() =>
                         document.getElementById("choose_category").showModal()
@@ -94,8 +106,8 @@ export const AddRecord = ({ expense }) => {
                       <form method="dialog" className="modal-backdrop">
                         <button>close</button>
                       </form>
-                    </dialog>
-                  </div>
+                    </dialog> */}
+
                   {/* ene hurtel */}
                 </div>
                 <div className="flex  justify-between">

@@ -4,6 +4,7 @@ import { PlusIcon } from "@/svg/PlusIcon";
 import { AddRecord } from "./AddRecord";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PlusAdd } from "./records/PlusAdd";
 
 export const Header = ({ dashboard, records }) => {
   const router = useRouter();
@@ -33,6 +34,7 @@ export const Header = ({ dashboard, records }) => {
         </Link>
       </div>
       <div className="flex items-center gap-6">
+        {/* <PlusAdd /> */}
         <AddRecord />
         <button onClick={LogOutButton} className="font-[600]">
           Log out

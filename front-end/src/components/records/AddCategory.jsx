@@ -32,34 +32,30 @@ import {
 } from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
-import { useEffect, useState } from "react";
-import { IconArrow } from "./IconArrow";
+import { useState } from "react";
+
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 import Home from "@/app/page";
 
-export const AddCategory = () => {
-  const [bgColor, setBgColor] = useState("#343330");
+export const AddCategory = ({ colors, icons }) => {
+  const [bgColor, setBgColor] = useState("#F3F4F6");
   const [bgIcon, setBgIcon] = useState("HomeIcon");
   const [categoryName, setCategoryName] = useState("");
-  const [newCategory, setNewCategory] = useState([]);
+  // const [newCategory, setNewCategory] = useState([]);
 
   const handleColor = (color) => {
     return setBgColor(color);
   };
-  console.log(bgColor);
 
   const handleIcon = (iconName) => {
     return setBgIcon(iconName);
   };
-  console.log(bgIcon);
 
   const handleInputChange = (event) => {
     setCategoryName(event.target.value);
   };
-  console.log(categoryName);
 
-  const addCategory = async ({ event }) => {
-    event.preventDefault();
+  const addCategory = async () => {
     try {
       const options = {
         method: "POST",
@@ -77,7 +73,7 @@ export const AddCategory = () => {
       }
       const data = await response.json();
 
-      setNewCategory((prevCategory) => [...prevCategory, data]);
+      // setNewCategory((prevCategory) => [...prevCategory, data]);
     } catch (error) {
       console.log("error");
     }
@@ -92,57 +88,59 @@ export const AddCategory = () => {
 
   // useEffect(() => {}, []);
 
-  const colors = [
-    { id: 1, color: "#0166FF" },
-    { id: 2, color: "#01B3FF" },
-    { id: 3, color: "#41CC00" },
-    { id: 4, color: "#F9D100" },
-    { id: 5, color: "#FF7B01" },
-    { id: 6, color: "#AE01FF" },
-    { id: 7, color: "#FF0101" },
-  ];
+  // const colors = [
+  //   { id: 1, color: "#0166FF" },
+  //   { id: 2, color: "#01B3FF" },
+  //   { id: 3, color: "#41CC00" },
+  //   { id: 4, color: "#F9D100" },
+  //   { id: 5, color: "#FF7B01" },
+  //   { id: 6, color: "#AE01FF" },
+  //   { id: 7, color: "#FF0101" },
+  // ];
 
-  const icons = [
-    { name: "HomeIcon", icon: <HomeIcon /> },
-    { name: "SecondIcon", icon: <SecondIcon /> },
-    { name: "ThirdIcon", icon: <ThirdIcon /> },
-    { name: "FourthIcon", icon: <FourthIcon /> },
-    { name: "FifthIcon", icon: <FifthIcon /> },
-    { name: "Sixthcon", icon: <Sixthcon /> },
-    { name: "SeventhIcon", icon: <SeventhIcon /> },
-    { name: "EightIcon", icon: <EightIcon /> },
-    { name: "NinethIcon", icon: <NinethIcon /> },
-    { name: "TenthIcon", icon: <TenthIcon /> },
-    { name: "EleventhIcon", icon: <EleventhIcon /> },
-    { name: "TwelfthIcon", icon: <TwelfthIcon /> },
-    { name: "ThirteenthIcon", icon: <ThirteenthIcon /> },
-    { name: "Fourteenth", icon: <Fourteenth /> },
-    { name: "FifteenthIcon", icon: <FifteenthIcon /> },
-    { name: "SixteenthIcon", icon: <SixteenthIcon /> },
-    { name: "SeventeenthIcon", icon: <SeventeenthIcon /> },
-    { name: "EighteenthIcon", icon: <EighteenthIcon /> },
-    { name: "NineteenthIcon", icon: <NineteenthIcon /> },
-    { name: "TwentiethIcon", icon: <TwentiethIcon /> },
-    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon /> },
-    { name: "TwentySecondIcon", icon: <TwentySecondIcon /> },
-    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon /> },
-    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon /> },
-    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon /> },
-    { name: "TwentySixthIcon", icon: <TwentySixthIcon /> },
-    {
-      name: "TwentySeventhIcon",
-      icon: <TwentySeventhIcon />,
-    },
-    { name: "TwentyEighticon", icon: <TwentyEighticon /> },
-    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon /> },
-    { name: "ThirtiethIcon", icon: <ThirtiethIcon /> },
-  ];
+  // const icons = [
+  //   { name: "HomeIcon", icon: <HomeIcon /> },
+  //   { name: "SecondIcon", icon: <SecondIcon /> },
+  //   { name: "ThirdIcon", icon: <ThirdIcon /> },
+  //   { name: "FourthIcon", icon: <FourthIcon /> },
+  //   { name: "FifthIcon", icon: <FifthIcon /> },
+  //   { name: "Sixthcon", icon: <Sixthcon /> },
+  //   { name: "SeventhIcon", icon: <SeventhIcon /> },
+  //   { name: "EightIcon", icon: <EightIcon /> },
+  //   { name: "NinethIcon", icon: <NinethIcon /> },
+  //   { name: "TenthIcon", icon: <TenthIcon /> },
+  //   { name: "EleventhIcon", icon: <EleventhIcon /> },
+  //   { name: "TwelfthIcon", icon: <TwelfthIcon /> },
+  //   { name: "ThirteenthIcon", icon: <ThirteenthIcon /> },
+  //   { name: "Fourteenth", icon: <Fourteenth /> },
+  //   { name: "FifteenthIcon", icon: <FifteenthIcon /> },
+  //   { name: "SixteenthIcon", icon: <SixteenthIcon /> },
+  //   { name: "SeventeenthIcon", icon: <SeventeenthIcon /> },
+  //   { name: "EighteenthIcon", icon: <EighteenthIcon /> },
+  //   { name: "NineteenthIcon", icon: <NineteenthIcon /> },
+  //   { name: "TwentiethIcon", icon: <TwentiethIcon /> },
+  //   { name: "TwentyFirstIcon", icon: <TwentyFirstIcon /> },
+  //   { name: "TwentySecondIcon", icon: <TwentySecondIcon /> },
+  //   { name: "TwentyThirdIcon", icon: <TwentyThirdIcon /> },
+  //   { name: "TwentyFourthIcon", icon: <TwentyFourthIcon /> },
+  //   { name: "TwentyFifthIcon", icon: <TwentyFifthIcon /> },
+  //   { name: "TwentySixthIcon", icon: <TwentySixthIcon /> },
+  //   {
+  //     name: "TwentySeventhIcon",
+  //     icon: <TwentySeventhIcon />,
+  //   },
+  //   { name: "TwentyEighticon", icon: <TwentyEighticon /> },
+  //   { name: "TwentyNinethIcon", icon: <TwentyNinethIcon /> },
+  //   { name: "ThirtiethIcon", icon: <ThirtiethIcon /> },
+  // ];
 
-  const defaultIcon = icons.find((icon) => {
-    if (icon?.name === bgIcon) {
-      return icon.icon;
-    }
-  });
+  const defaultIcon = icons?.find((icon) => icon?.name === bgIcon);
+  // icons.find((icon) => {
+  //   if (icon.name == bgIcon) {
+  //     return icon.icon;
+  //   }
+  // });
+
   return (
     <div>
       <button
@@ -163,14 +161,23 @@ export const AddCategory = () => {
           <div className="py-[24px] px-[20px] flex flex-col gap-8">
             <div className="flex justify-between w-[446px] items-center">
               <details className="dropdown">
-                <summary className={`btn m-1 bg-[${bgColor}]`}>
-                  {defaultIcon}
+                <summary
+                  style={{ backgroundColor: bgColor }}
+                  className={`btn m-1 ] flex flex-col`}
+                >
+                  {defaultIcon?.icon}
+                  <CategoryArrow />
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-[320px] p-2 shadow">
                   <li className="grid grid-cols-6 grid-rows-5 w-[300px]">
                     {icons.map((icon, index) => {
                       return (
-                        <button onClick={handleIcon} key={index}>
+                        <button
+                          onClick={() => {
+                            handleIcon(icon?.name);
+                          }}
+                          key={index}
+                        >
                           {icon.icon}
                         </button>
                       );
@@ -179,7 +186,9 @@ export const AddCategory = () => {
                   <div className="flex justify-between items-center mt-4">
                     {colors.map((color) => (
                       <button
-                        onClick={handleColor}
+                        onClick={() => {
+                          handleColor(color?.color);
+                        }}
                         key={color.id}
                         style={{ backgroundColor: color.color }}
                         className={`w-8 h-8 rounded-full`}

@@ -1,16 +1,19 @@
 "use client";
 
 import { EyeIcon } from "@/svg/EyeIcon";
-import { AddCategory } from "./AddCategory";
 import { PlusAdd } from "./PlusAdd";
-import { AddCategoryTest } from "./AddCategoryTest";
+import { AddRecord } from "../AddRecord";
+import { AddCategory } from "./AddCategory";
 
-export const LeftSide = () => {
+export const LeftSide = ({ categories, colors, icons }) => {
+  console.log(categories);
+
   return (
     <div className="w-[282px] h-[912px] rounded-xl border border-[#E5E7EB] mt-8 bg-white px-4 py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <h1 className="text-[24px] font-[600] leading-8">Records</h1>
-        <PlusAdd />
+        <AddRecord categories={categories} colors={colors} icons={icons} />
+        {/* <PlusAdd /> */}
       </div>
       <input
         className="border border-[#D1D5DB] rounded-lg bg-[#F3F4F6] px-4 py-1"
@@ -55,59 +58,20 @@ export const LeftSide = () => {
           </button>
         </div>
         <div className="flex flex-col gap-[8px] pl-3">
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Food & Drinks</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Shopping</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Housing</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Transportation</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Vehicle</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">
-              Life & Entertainment
-            </p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">
-              Communication, PC
-            </p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">
-              Financial expenses
-            </p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Investments</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Income</p>
-          </div>
-          <div className="flex gap-[10px]">
-            <EyeIcon />
-            <p className="text-[16px] font-[400] leading-6">Other</p>
-          </div>
+          {categories &&
+            categories.map((category, id) => {
+              return (
+                <div key={id} className="flex gap-[10px]">
+                  <EyeIcon />
+                  <p className="text-[16px] font-[400] leading-6">
+                    {category.name}
+                  </p>
+                </div>
+              );
+            })}
         </div>
         <div className="flex items-center ">
-          <AddCategory />
+          <AddCategory colors={colors} icons={icons} />
         </div>
       </div>
     </div>
