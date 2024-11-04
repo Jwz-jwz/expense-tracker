@@ -32,32 +32,34 @@ import {
 } from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconArrow } from "./IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 import Home from "@/app/page";
 
 export const AddCategory = () => {
   const [bgColor, setBgColor] = useState("#343330");
-  const [bgIcon, setBgIcon] = useState({});
+  const [bgIcon, setBgIcon] = useState(<HomeIcon color={bgColor} />);
   const [categoryName, setCategoryName] = useState("");
   const [newCategory, setNewCategory] = useState([]);
-  const [defCategory, setDefCategory] = useState([
-    <HomeIcon color={bgColor} />,
-  ]);
+  const [defCategory, setDefCategory] = useState([bgIcon]);
   console.log(newCategory);
+  console.log(defCategory);
 
   const handleColor = (color) => {
     return setBgColor(color);
   };
+  console.log(bgColor);
 
   const handleIcon = (iconName) => {
     return setBgIcon(iconName);
   };
+  console.log(bgIcon);
 
   const handleInputChange = (event) => {
     setCategoryName(event.target.value);
   };
+  console.log(categoryName);
 
   const addCategory = async () => {
     try {
@@ -84,6 +86,15 @@ export const AddCategory = () => {
     }
   };
 
+  // const fetchCategores = async () => {
+  //   const response = await fetch(`${BACKEND_ENDPOINT}/category`);
+  //   const data = await response.json();
+
+  //   setNewCategory((prevCategory) => [...prevCategory, data]);
+  // };
+
+  // useEffect(() => {}, []);
+
   const colors = [
     { id: 1, color: "#0166FF" },
     { id: 2, color: "#01B3FF" },
@@ -93,6 +104,7 @@ export const AddCategory = () => {
     { id: 6, color: "#AE01FF" },
     { id: 7, color: "#FF0101" },
   ];
+
   const icons = [
     { name: "HomeIcon", icon: <HomeIcon color={bgColor} /> },
     { name: "SecondIcon", icon: <SecondIcon color={bgColor} /> },
@@ -128,7 +140,6 @@ export const AddCategory = () => {
     { name: "TwentyNinethIcon", icon: <TwentyNinethIcon color={bgColor} /> },
     { name: "ThirtiethIcon", icon: <ThirtiethIcon color={bgColor} /> },
   ];
-
   return (
     <div>
       <button
@@ -187,7 +198,7 @@ export const AddCategory = () => {
                               handleColor(color?.color);
                             }}
                             key={index}
-                            className={`w-8 h-8 rounded-full bg-[${color.color}]`}
+                            className={`w-8 h-8 rounded-full bg-[${color?.color}]`}
                           ></button>
                         );
                       })}
@@ -206,9 +217,11 @@ export const AddCategory = () => {
               />
             </div>
             <button>
-              {newCategory.map((category) => {
+              {newCategory.map((category, index) => {
+                console.log("new category", category);
+
                 return (
-                  <div className="flex gap-[20px]">
+                  <div key={index} className="flex gap-[20px]">
                     <div className="flex">{category?.name}</div>
                   </div>
                 );
