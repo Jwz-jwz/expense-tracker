@@ -4,6 +4,7 @@ import { useState } from "react";
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { AddCategory } from "./records/AddCategory";
+import { AddCategoryTest } from "./records/AddCategoryTest";
 
 export const AddRecord = ({ expense }) => {
   const [isClicked, setIsClicked] = useState(true);

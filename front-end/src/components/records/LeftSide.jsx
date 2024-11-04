@@ -3,6 +3,7 @@
 import { EyeIcon } from "@/svg/EyeIcon";
 import { AddCategory } from "./AddCategory";
 import { PlusAdd } from "./PlusAdd";
+import { AddCategoryTest } from "./AddCategoryTest";
 
 export const LeftSide = () => {
   return (

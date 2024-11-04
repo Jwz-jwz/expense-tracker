@@ -1,5 +1,4 @@
 import {
-  EighteenthIcon,
   EightIcon,
   EleventhIcon,
   FifteenthIcon,
@@ -7,59 +6,40 @@ import {
   Fourteenth,
   FourthIcon,
   HomeIcon,
-  NineteenthIcon,
   NinethIcon,
   SecondIcon,
-  SeventeenthIcon,
   SeventhIcon,
-  SixteenthIcon,
   Sixthcon,
   TenthIcon,
   ThirdIcon,
   ThirteenthIcon,
-  ThirtiethIcon,
   TwelfthIcon,
-  TwentiethIcon,
-  TwentyEighticon,
-  TwentyFifthIcon,
-  TwentyFirstIcon,
-  TwentyFourthIcon,
-  TwentyNinethIcon,
-  TwentySecondIcon,
-  TwentySeventhIcon,
-  TwentySixthIcon,
-  TwentyThirdIcon,
 } from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { useEffect, useState } from "react";
-import { IconArrow } from "./IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
-import Home from "@/app/page";
 
-export const AddCategory = () => {
-  const [bgColor, setBgColor] = useState("#343330");
-  const [bgIcon, setBgIcon] = useState("HomeIcon");
+export const AddCategoryTest = () => {
+  const [bgColor, setBgColor] = useState("#F3F4F6");
+  const [bgIcon, setBgIcon] = useState(<HomeIcon />);
   const [categoryName, setCategoryName] = useState("");
   const [newCategory, setNewCategory] = useState([]);
+  const [defCategory, setDefCategory] = useState([bgIcon]);
 
   const handleColor = (color) => {
     return setBgColor(color);
   };
-  console.log(bgColor);
 
   const handleIcon = (iconName) => {
     return setBgIcon(iconName);
   };
-  console.log(bgIcon);
 
   const handleInputChange = (event) => {
     setCategoryName(event.target.value);
   };
-  console.log(categoryName);
 
-  const addCategory = async ({ event }) => {
-    event.preventDefault();
+  const addCategory = async () => {
     try {
       const options = {
         method: "POST",
@@ -77,6 +57,7 @@ export const AddCategory = () => {
       }
       const data = await response.json();
 
+      setDefCategory(data);
       setNewCategory((prevCategory) => [...prevCategory, data]);
     } catch (error) {
       console.log("error");
@@ -118,31 +99,7 @@ export const AddCategory = () => {
     { name: "ThirteenthIcon", icon: <ThirteenthIcon /> },
     { name: "Fourteenth", icon: <Fourteenth /> },
     { name: "FifteenthIcon", icon: <FifteenthIcon /> },
-    { name: "SixteenthIcon", icon: <SixteenthIcon /> },
-    { name: "SeventeenthIcon", icon: <SeventeenthIcon /> },
-    { name: "EighteenthIcon", icon: <EighteenthIcon /> },
-    { name: "NineteenthIcon", icon: <NineteenthIcon /> },
-    { name: "TwentiethIcon", icon: <TwentiethIcon /> },
-    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon /> },
-    { name: "TwentySecondIcon", icon: <TwentySecondIcon /> },
-    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon /> },
-    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon /> },
-    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon /> },
-    { name: "TwentySixthIcon", icon: <TwentySixthIcon /> },
-    {
-      name: "TwentySeventhIcon",
-      icon: <TwentySeventhIcon />,
-    },
-    { name: "TwentyEighticon", icon: <TwentyEighticon /> },
-    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon /> },
-    { name: "ThirtiethIcon", icon: <ThirtiethIcon /> },
   ];
-
-  const defaultIcon = icons.find((icon) => {
-    if (icon?.name === bgIcon) {
-      return icon.icon;
-    }
-  });
   return (
     <div>
       <button
@@ -162,33 +119,84 @@ export const AddCategory = () => {
           </div>
           <div className="py-[24px] px-[20px] flex flex-col gap-8">
             <div className="flex justify-between w-[446px] items-center">
+              <div>
+                {/* <button
+                  className={`btn 
+                    bg - ${[
+                      bgColor,
+                    ]} border border-[#D1D5DB] flex justify-between`}
+                  onClick={() =>
+                    document.getElementById("my_modal_2").showModal()
+                  }
+                >
+                  <div>{defCategory[0]}</div>
+                  <CategoryArrow />
+                </button>
+                <dialog
+                  id="my_modal_2"
+                  className="top-[196px] left-[-70px] p-[24px] modal"
+                >
+                  <div className=" w-[312px] modal-box flex flex-col gap-6">
+                    <div className="grid grid-cols-6 grid-rows-5 gap-6 ">
+                      {icons.map((icon, index) => {
+                        return (
+                          <button
+                            onClick={() => {
+                              handleIcon(icon?.name);
+                            }}
+                            key={index}
+                          >
+                            {icon?.icon}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <p className="border-b border-b-[#E2E8F0] w-full"></p>
+                    <div className="grid grid-cols-7 gap-4">
+                      {colors.map((color, index) => {
+                        return (
+                          <button
+                            onClick={() => {
+                              handleColor(color?.color);
+                            }}
+                            key={index}
+                            className={`w-8 h-8 rounded-full bg-[${color?.color}]`}
+                          ></button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                  </form>
+                </dialog> */}
+              </div>
               <details className="dropdown">
-                <summary className={`btn m-1 bg-[${bgColor}]`}>
-                  {defaultIcon}
-                </summary>
+                <summary className="btn m-1">{bgIcon}</summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-[320px] p-2 shadow">
-                  <li className="grid grid-cols-6 grid-rows-5 w-[300px]">
+                  <li className="w-[300px] grid grid-cols-6 grid-rows-5">
                     {icons.map((icon, index) => {
                       return (
-                        <button onClick={handleIcon} key={index}>
+                        <div key={index} className="">
                           {icon.icon}
-                        </button>
+                        </div>
                       );
                     })}
                   </li>
-                  <div className="flex justify-between items-center mt-4">
-                    {colors.map((color) => (
-                      <button
-                        onClick={handleColor}
-                        key={color.id}
-                        style={{ backgroundColor: color.color }}
-                        className={`w-8 h-8 rounded-full`}
-                      ></button>
-                    ))}
-                  </div>
+                  <button className="flex">
+                    {colors.map((color, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={`bg-[${color?.color}] rounded-ful w-8 h-8`}
+                        >
+                          hi
+                        </div>
+                      );
+                    })}
+                  </button>
                 </ul>
               </details>
-
               <input
                 onChange={handleInputChange}
                 type="text"
@@ -196,7 +204,6 @@ export const AddCategory = () => {
                 className="input input-bordered w-[350px] bg-[#F3F4F6]"
               />
             </div>
-
             <button
               onClick={addCategory}
               className="w-ful bg-[#16A34A] text-white rounded-[24px] py-[10px]"
