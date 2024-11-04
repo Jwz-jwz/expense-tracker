@@ -12,10 +12,6 @@ app.use(cors());
 const port = 8368;
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-app.get("/aaasdsads", (request, response) => {
-  response.send("hello tanii GET huselt irlee");
-});
-
 app.post("/sign-in", async (request, response) => {
   const { email, password } = request.body;
 
@@ -76,6 +72,14 @@ app.post("/category", async (request, response) => {
     console.log("response ni shuu", newCategory[0]);
   } catch (error) {
     response.json({ message: "Internal server error during login user" });
+  }
+});
+app.get("/category", async (request, response) => {
+  try {
+    const allCategory = await sql`SELECT * FROM category `;
+    response.status(200).json({ message: "All category", data: allCategory });
+  } catch (error) {
+    console.log(error);
   }
 });
 
