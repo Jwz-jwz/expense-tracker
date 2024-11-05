@@ -83,6 +83,29 @@ app.get("/category", async (request, response) => {
   }
 });
 
+app.post("/record", async (request, response) => {
+  const { use_id, name, amount, transaction_type, description, category_id } =
+    request.body;
+  console.log("request shuu", request.body);
+
+  // try {
+  //   const existedCategory =
+  //     await sql`SELECT * FROM category WHERE name=${categoryName}`;
+  //   if (existedCategory.length > 0) {
+  //     return response.status(400).json({ message: "Category already exist" });
+  //   }
+  //   const newCategory =
+  //     await sql`INSERT INTO category (name, category_icon, icon_color)
+  //               VALUES(${categoryName}, ${bgIcon}, ${bgColor} )
+  //               RETURNING *`;
+
+  //   response.status(201).json(newCategory[0]);
+  //   console.log("response ni shuu", newCategory[0]);
+  // } catch (error) {
+  //   response.json({ message: "Internal server error during login user" });
+  // }
+});
+
 app.listen(port, () => {
   console.log(`server ajillaj ehelle http://localhost:${port}`);
 });
