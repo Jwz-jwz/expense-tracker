@@ -1,18 +1,14 @@
-"use client";
-
 import { EyeIcon } from "@/svg/EyeIcon";
 import { PlusAdd } from "./PlusAdd";
 import { AddRecord } from "../AddRecord";
 import { AddCategory } from "./AddCategory";
 
-export const LeftSide = ({ categories, colors, icons }) => {
-  console.log(categories);
-
+export const LeftSide = ({ categories, colors, icons, setCategory }) => {
   return (
     <div className="w-[282px] h-[912px] rounded-xl border border-[#E5E7EB] mt-8 bg-white px-4 py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <h1 className="text-[24px] font-[600] leading-8">Records</h1>
-        <AddRecord categories={categories} colors={colors} icons={icons} />
+        <AddRecord colors={colors} icons={icons} />
         {/* <PlusAdd /> */}
       </div>
       <input
@@ -59,19 +55,26 @@ export const LeftSide = ({ categories, colors, icons }) => {
         </div>
         <div className="flex flex-col gap-[8px] pl-3">
           {categories &&
-            categories.map((category, id) => {
+            categories.map((category) => {
               return (
-                <div key={id} className="flex gap-[10px]">
+                <div
+                  key={category?.id}
+                  className="flex gap-[10px] items-center"
+                >
                   <EyeIcon />
-                  <p className="text-[16px] font-[400] leading-6">
-                    {category.name}
-                  </p>
+                  <button className="text-[16buttonx] font-[400] leading-6">
+                    {category?.name}
+                  </button>
                 </div>
               );
             })}
         </div>
         <div className="flex items-center ">
-          <AddCategory colors={colors} icons={icons} />
+          <AddCategory
+            colors={colors}
+            icons={icons}
+            setCategory={setCategory}
+          />
         </div>
       </div>
     </div>

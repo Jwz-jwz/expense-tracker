@@ -40,14 +40,12 @@ import { useEffect, useState } from "react";
 
 export const Records = () => {
   const [category, setCategory] = useState([]);
+
   const fetchCategories = async () => {
     try {
       const response = await fetch(`${BACKEND_ENDPOINT}/category`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
       const data = await response.json();
-      setCategory(data?.data || []);
+      setCategory(data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +55,7 @@ export const Records = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
+
   const colors = [
     { id: 1, color: "#0166FF" },
     { id: 2, color: "#01B3FF" },
@@ -110,7 +109,12 @@ export const Records = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center bg-[#F3F4F6] pb-[40px]">
         <div className="w-[1200px] flex gap-6">
-          <LeftSide categories={category} colors={colors} icons={icons} />
+          <LeftSide
+            categories={category}
+            colors={colors}
+            icons={icons}
+            setCategory={setCategory}
+          />
           <RightSide />
         </div>
       </div>

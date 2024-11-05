@@ -1,25 +1,92 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { AddCategory } from "./records/AddCategory";
+import { IconArrow } from "./records/IconArrow";
+import { BACKEND_ENDPOINT } from "@/constants/constant";
 
-export const AddRecord = ({ categories, colors, icons }) => {
-  console.log(categories);
-
+export const AddRecord = ({ colors, icons }) => {
   const [isClicked, setIsClicked] = useState(true);
   const [isColor, setIsColor] = useState(true);
+  const [transaction, setTransaction] = useState("");
+  const [postRecord, setPostRecord] = useState({});
+  const [categoryId, setCategoryId] = useState();
 
-  const ChangeBgColor = () => {
+  const handleTransaction = {
+    setTransaction,
+  };
+
+  const ChangeBgColor = (value) => {
     setIsClicked(!isClicked);
     setIsColor(!isColor);
+    setTransaction(value);
   };
+  console.log(transaction);
+
+  const [category, setCategory] = useState([]);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(`${BACKEND_ENDPOINT}/category`);
+      const data = await response.json();
+      setCategory(data?.data);
+      // setCategory((prevCategory) => [...prevCategory, ...data?.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const recordPost = async () => {
+    const postRequest = {
+      user_id: "3a6b6809-359e-4378-a95b-874819a28119",
+      name: postRecord?.name,
+      amount: postRecord?.amount,
+      transaction_type: transaction,
+      description: postRecord?.description,
+      category_id: categoryId,
+      date: postRecord?.date,
+      time: postRecord?.time,
+    };
+    console.log(recordPost);
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(postRequest),
+    };
+    const response = await fetch(`${BACKEND_ENDPOINT}/record`, options);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  //selectedCategory-n id-g avah heseg
+  const selectCategory = (event) => {
+    setCategoryId(event.target.value);
+  };
+  // console.log(categoryId);
+
+  //Input-r orj irj baigaa utguudiig huleej avah heseg
+  const handleInputValue = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setPostRecord((prevRecord) => {
+      return { ...prevRecord, [name]: value };
+    });
+  };
+  console.log(postRecord);
+
   return (
     <div>
       <button
         className="h-8 w-full bg-[#0166FF] flex items-center justify-center rounded-[20px] gap-1"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
+        onClick={() => {
+          document.getElementById("my_modal_3").showModal();
+        }}
       >
         <WhitePlusIcon />
         <p className="text-[12px] leading-4 font-[400] text-[white]">Add</p>
@@ -39,7 +106,9 @@ export const AddRecord = ({ categories, colors, icons }) => {
             <div className="w-[50%] flex flex-col gap-[20px] px-[20px] py-[24px]">
               <div className="flex justify-between  w-[348px] rounded-[20px] bg-[#F3F4F6]">
                 <button
-                  onClick={ChangeBgColor}
+                  onClick={() => {
+                    ChangeBgColor("EXP");
+                  }}
                   className={`w-[172px] h-[40px] py-[12px] ${
                     isClicked
                       ? "bg-[#0166FF] text-white rounded-[20px]"
@@ -49,7 +118,9 @@ export const AddRecord = ({ categories, colors, icons }) => {
                   Expense
                 </button>
                 <button
-                  onClick={ChangeBgColor}
+                  onClick={() => {
+                    ChangeBgColor("INC");
+                  }}
                   className={`w-[172px] h-[40px] py-[12px] ${
                     isClicked
                       ? "bg-[#F3F4F6] text-black rounded-r-[20px]"
@@ -63,6 +134,8 @@ export const AddRecord = ({ categories, colors, icons }) => {
                 <div className="w-full h-[76px] px-4 py-3 bg-[#F3F4F6] rounded-[8px] border border-[#D1D5DB]">
                   <p className="text-[16px] font-[400] leading-6">Amount</p>
                   <input
+                    onChange={handleInputValue}
+                    name="amount"
                     placeholder="₮ 000.00"
                     type="text"
                     className="bg-[#F3F4F6]"
@@ -70,50 +143,35 @@ export const AddRecord = ({ categories, colors, icons }) => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <p className="text-[16px] font-[400] leading-6">Category</p>
-                  {/* Endees category choose hiij baigaa heseg */}
 
-                  <select className="select select-bordered w-full bg-[#F3F4F6]">
+                  <select
+                    onChange={selectCategory}
+                    // onChange={() => {
+                    //   selectCategory(categorySingle?.id);
+                    // }}
+                    className="select select-bordered w-full bg-[#F3F4F6]"
+                  >
                     <option value="" defaultValue>
                       Choose category
                     </option>
-                    {categories &&
-                      categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                          {category.name}
+                    {category?.map((categorySingle) => {
+                      return (
+                        <option
+                          key={categorySingle?.id}
+                          value={categorySingle?.id}
+                        >
+                          {categorySingle?.name}
                         </option>
-                      ))}
+                      );
+                    })}
                   </select>
-                  {/* <button
-                      className="btn w-full bg-[#F3F4F6] border border-[#D1D5DB] flex justify-between "
-                      onClick={() =>
-                        document.getElementById("choose_category").showModal()
-                      }
-                    >
-                      <p className="text-[#94A3B8] text-[16px] font-[400] leading-6 ">
-                        Choose
-                      </p>
-                      <CategoryArrow />
-                    </button>
-
-                    <dialog
-                      id="choose_category"
-                      className="modal w-[375px] top-[109px] left-[730px]"
-                    >
-                      <div className="modal-box">
-                        <AddCategory />
-                        <p className="border-b border-b-[#E2E8F0] w-full"></p>
-                      </div>
-                      <form method="dialog" className="modal-backdrop">
-                        <button>close</button>
-                      </form>
-                    </dialog> */}
-
-                  {/* ene hurtel */}
                 </div>
                 <div className="flex  justify-between">
                   <div className="flex flex-col gap-1 w-[168px]">
                     <p className="text-[16px] font-[400] leading-6">Date</p>
                     <input
+                      onChange={handleInputValue}
+                      name="date"
                       className="bg-[#F3F4F6] rounded-[8px] border border-[#D1D5DB] p-[8px]"
                       type="date"
                     />
@@ -121,12 +179,15 @@ export const AddRecord = ({ categories, colors, icons }) => {
                   <div className="flex flex-col gap-1 w-[168px]">
                     <p className="text-[16px] font-[400] leading-6">Time</p>
                     <input
+                      onChange={handleInputValue}
+                      name="time"
                       className="bg-[#F3F4F6] rounded-[8px] border border-[#D1D5DB] p-[8px]"
                       type="time"
                     />
                   </div>
                 </div>
                 <button
+                  onClick={recordPost}
                   className={`w-full rounded-[20px] flex justify-center items-center text-white py-[12px] ${
                     isColor ? "bg-[#0166FF]" : "bg-[#16A34A]"
                   }`}
@@ -140,6 +201,8 @@ export const AddRecord = ({ categories, colors, icons }) => {
               <div className="flex flex-col gap-1">
                 <p className="text-[16px] font-[400] leading-6">Payee</p>
                 <input
+                  onChange={handleInputValue}
+                  name="name"
                   type="text"
                   placeholder="Write here"
                   className="w-full input input-bordered bg-[#F3F4F6]"
@@ -148,6 +211,8 @@ export const AddRecord = ({ categories, colors, icons }) => {
               <div className="flex flex-col gap-1">
                 <p className="text-[16px] font-[400] leading-6">Note</p>
                 <textarea
+                  onChange={handleInputValue}
+                  name="description"
                   type="text"
                   placeholder="Write here"
                   className="w-full h-[280px] input input-bordered bg-[#F3F4F6] pt-[10px]"

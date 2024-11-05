@@ -43,6 +43,7 @@ export const SignInPage = () => {
           toast.success("Login successful!");
           localStorage.setItem("isLoggedIn", "true");
           router.push("/dashboard");
+          return;
         }
 
         if (response.status === 400) {

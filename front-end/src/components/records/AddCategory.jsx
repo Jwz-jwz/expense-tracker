@@ -37,7 +37,7 @@ import { useState } from "react";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 import Home from "@/app/page";
 
-export const AddCategory = ({ colors, icons }) => {
+export const AddCategory = ({ colors, icons, setCategory }) => {
   const [bgColor, setBgColor] = useState("#F3F4F6");
   const [bgIcon, setBgIcon] = useState("HomeIcon");
   const [categoryName, setCategoryName] = useState("");
@@ -67,72 +67,14 @@ export const AddCategory = ({ colors, icons }) => {
       };
 
       const response = await fetch(`${BACKEND_ENDPOINT}/category`, options);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
       const data = await response.json();
-
-      // setNewCategory((prevCategory) => [...prevCategory, data]);
+      // state change
+      setCategory((prevCats) => [...prevCats, data]);
     } catch (error) {
       console.log("error");
     }
+    document.getElementById("add_category").close();
   };
-
-  // const fetchCategores = async () => {
-  //   const response = await fetch(`${BACKEND_ENDPOINT}/category`);
-  //   const data = await response.json();
-
-  //   setNewCategory((prevCategory) => [...prevCategory, data]);
-  // };
-
-  // useEffect(() => {}, []);
-
-  // const colors = [
-  //   { id: 1, color: "#0166FF" },
-  //   { id: 2, color: "#01B3FF" },
-  //   { id: 3, color: "#41CC00" },
-  //   { id: 4, color: "#F9D100" },
-  //   { id: 5, color: "#FF7B01" },
-  //   { id: 6, color: "#AE01FF" },
-  //   { id: 7, color: "#FF0101" },
-  // ];
-
-  // const icons = [
-  //   { name: "HomeIcon", icon: <HomeIcon /> },
-  //   { name: "SecondIcon", icon: <SecondIcon /> },
-  //   { name: "ThirdIcon", icon: <ThirdIcon /> },
-  //   { name: "FourthIcon", icon: <FourthIcon /> },
-  //   { name: "FifthIcon", icon: <FifthIcon /> },
-  //   { name: "Sixthcon", icon: <Sixthcon /> },
-  //   { name: "SeventhIcon", icon: <SeventhIcon /> },
-  //   { name: "EightIcon", icon: <EightIcon /> },
-  //   { name: "NinethIcon", icon: <NinethIcon /> },
-  //   { name: "TenthIcon", icon: <TenthIcon /> },
-  //   { name: "EleventhIcon", icon: <EleventhIcon /> },
-  //   { name: "TwelfthIcon", icon: <TwelfthIcon /> },
-  //   { name: "ThirteenthIcon", icon: <ThirteenthIcon /> },
-  //   { name: "Fourteenth", icon: <Fourteenth /> },
-  //   { name: "FifteenthIcon", icon: <FifteenthIcon /> },
-  //   { name: "SixteenthIcon", icon: <SixteenthIcon /> },
-  //   { name: "SeventeenthIcon", icon: <SeventeenthIcon /> },
-  //   { name: "EighteenthIcon", icon: <EighteenthIcon /> },
-  //   { name: "NineteenthIcon", icon: <NineteenthIcon /> },
-  //   { name: "TwentiethIcon", icon: <TwentiethIcon /> },
-  //   { name: "TwentyFirstIcon", icon: <TwentyFirstIcon /> },
-  //   { name: "TwentySecondIcon", icon: <TwentySecondIcon /> },
-  //   { name: "TwentyThirdIcon", icon: <TwentyThirdIcon /> },
-  //   { name: "TwentyFourthIcon", icon: <TwentyFourthIcon /> },
-  //   { name: "TwentyFifthIcon", icon: <TwentyFifthIcon /> },
-  //   { name: "TwentySixthIcon", icon: <TwentySixthIcon /> },
-  //   {
-  //     name: "TwentySeventhIcon",
-  //     icon: <TwentySeventhIcon />,
-  //   },
-  //   { name: "TwentyEighticon", icon: <TwentyEighticon /> },
-  //   { name: "TwentyNinethIcon", icon: <TwentyNinethIcon /> },
-  //   { name: "ThirtiethIcon", icon: <ThirtiethIcon /> },
-  // ];
 
   const defaultIcon = icons?.find((icon) => icon?.name === bgIcon);
   // icons.find((icon) => {
@@ -168,7 +110,10 @@ export const AddCategory = ({ colors, icons }) => {
                   {defaultIcon?.icon}
                   <CategoryArrow />
                 </summary>
-                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-[320px] p-2 shadow">
+                <ul
+                  id="unordered_list"
+                  className="menu dropdown-content bg-base-100 rounded-box z-[1] w-[320px] p-2 shadow"
+                >
                   <li className="grid grid-cols-6 grid-rows-5 w-[300px]">
                     {icons.map((icon, index) => {
                       return (
