@@ -21,7 +21,6 @@ export const AddRecord = ({ colors, icons }) => {
     setIsColor(!isColor);
     setTransaction(value);
   };
-  console.log(transaction);
 
   const [category, setCategory] = useState([]);
 
@@ -47,7 +46,6 @@ export const AddRecord = ({ colors, icons }) => {
       date: postRecord?.date,
       time: postRecord?.time,
     };
-    console.log(recordPost);
 
     const options = {
       method: "POST",
@@ -58,6 +56,10 @@ export const AddRecord = ({ colors, icons }) => {
       body: JSON.stringify(postRequest),
     };
     const response = await fetch(`${BACKEND_ENDPOINT}/record`, options);
+    const data = await response.json();
+    console.log(data);
+
+    document.getElementById("my_modal_3").close();
   };
 
   useEffect(() => {
@@ -68,7 +70,6 @@ export const AddRecord = ({ colors, icons }) => {
   const selectCategory = (event) => {
     setCategoryId(event.target.value);
   };
-  // console.log(categoryId);
 
   //Input-r orj irj baigaa utguudiig huleej avah heseg
   const handleInputValue = (event) => {
@@ -78,7 +79,6 @@ export const AddRecord = ({ colors, icons }) => {
       return { ...prevRecord, [name]: value };
     });
   };
-  console.log(postRecord);
 
   return (
     <div>
