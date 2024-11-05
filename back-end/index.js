@@ -55,7 +55,6 @@ app.post("/sign-up", async (request, response) => {
 
 app.post("/category", async (request, response) => {
   const { categoryName, bgColor, bgIcon } = request.body;
-  console.log("request shuu", request.body);
 
   try {
     const existedCategory =
@@ -69,7 +68,6 @@ app.post("/category", async (request, response) => {
                 RETURNING *`;
 
     response.status(201).json(newCategory[0]);
-    console.log("response ni shuu", newCategory[0]);
   } catch (error) {
     response.json({ message: "Internal server error during login user" });
   }
@@ -84,26 +82,27 @@ app.get("/category", async (request, response) => {
 });
 
 app.post("/record", async (request, response) => {
-  const { use_id, name, amount, transaction_type, description, category_id } =
-    request.body;
-  console.log("request shuu", request.body);
+  const {
+    user_id,
+    name,
+    amount,
+    transaction_type,
+    description,
+    category_id,
+    date,
+    time,
+  } = request.body;
 
-  // try {
-  //   const existedCategory =
-  //     await sql`SELECT * FROM category WHERE name=${categoryName}`;
-  //   if (existedCategory.length > 0) {
-  //     return response.status(400).json({ message: "Category already exist" });
-  //   }
-  //   const newCategory =
-  //     await sql`INSERT INTO category (name, category_icon, icon_color)
-  //               VALUES(${categoryName}, ${bgIcon}, ${bgColor} )
-  //               RETURNING *`;
+  try {
+    const newRecord =
+      await sql`INSERT INTO record (user_id, name, amount,transaction_type, description, category_id,date,time)
+                VALUES(${user_id}, ${name}, ${amount}, ${transaction_type}, ${description}, ${category_id}, ${date}, ${time} )
+                RETURNING *`;
 
-  //   response.status(201).json(newCategory[0]);
-  //   console.log("response ni shuu", newCategory[0]);
-  // } catch (error) {
-  //   response.json({ message: "Internal server error during login user" });
-  // }
+    response.status(201).json(newRecord[0]);
+  } catch (error) {
+    response.json({ message: "Internal server error during login user" });
+  }
 });
 
 app.listen(port, () => {
