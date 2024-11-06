@@ -5,16 +5,12 @@ import { AddCategory } from "./records/AddCategory";
 import { IconArrow } from "./records/IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 
-export const AddRecord = ({ colors, icons }) => {
+export const AddRecord = ({ colors, icons, setRecords }) => {
   const [isClicked, setIsClicked] = useState(true);
   const [isColor, setIsColor] = useState(true);
   const [transaction, setTransaction] = useState("");
   const [postRecord, setPostRecord] = useState({});
   const [categoryId, setCategoryId] = useState();
-
-  const handleTransaction = {
-    setTransaction,
-  };
 
   const ChangeBgColor = (value) => {
     setIsClicked(!isClicked);
@@ -57,8 +53,7 @@ export const AddRecord = ({ colors, icons }) => {
     };
     const response = await fetch(`${BACKEND_ENDPOINT}/record`, options);
     const data = await response.json();
-    console.log(data);
-
+    // setRecords((prevRecords) => [...prevRecords, data]);
     document.getElementById("my_modal_3").close();
   };
 

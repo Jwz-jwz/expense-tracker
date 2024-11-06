@@ -3,12 +3,18 @@ import { PlusAdd } from "./PlusAdd";
 import { AddRecord } from "../AddRecord";
 import { AddCategory } from "./AddCategory";
 
-export const LeftSide = ({ categories, colors, icons, setCategory }) => {
+export const LeftSide = ({
+  categories,
+  colors,
+  icons,
+  setCategory,
+  setRecords,
+}) => {
   return (
     <div className="w-[282px] h-[912px] rounded-xl border border-[#E5E7EB] mt-8 bg-white px-4 py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <h1 className="text-[24px] font-[600] leading-8">Records</h1>
-        <AddRecord colors={colors} icons={icons} />
+        <AddRecord colors={colors} icons={icons} setRecords={setRecords} />
         {/* <PlusAdd /> */}
       </div>
       <input

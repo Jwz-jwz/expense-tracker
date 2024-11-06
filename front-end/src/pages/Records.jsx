@@ -40,6 +40,7 @@ import { useEffect, useState } from "react";
 
 export const Records = () => {
   const [category, setCategory] = useState([]);
+  const [records, setRecords] = useState([]);
 
   const fetchCategories = async () => {
     try {
@@ -50,10 +51,20 @@ export const Records = () => {
       console.log(error);
     }
   };
-  // console.log(category);
+
+  const fetchRecords = async () => {
+    try {
+      const response = await fetch(`${BACKEND_ENDPOINT}/record`);
+      const data = await response.json();
+      setRecords(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchCategories();
+    fetchRecords();
   }, []);
 
   const colors = [
@@ -114,8 +125,14 @@ export const Records = () => {
             colors={colors}
             icons={icons}
             setCategory={setCategory}
+            setRecords={setRecords}
           />
-          <RightSide />
+          <RightSide
+            category={category}
+            records={records}
+            colors={colors}
+            icons={icons}
+          />
         </div>
       </div>
     </div>
