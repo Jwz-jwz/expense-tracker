@@ -105,6 +105,16 @@ app.post("/record", async (request, response) => {
   }
 });
 
+app.get("/record", async (request, response) => {
+  try {
+    const allRecords = await sql`SELECT * FROM record `;
+
+    response.status(200).json({ message: "All records", data: allRecords });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`server ajillaj ehelle http://localhost:${port}`);
 });
