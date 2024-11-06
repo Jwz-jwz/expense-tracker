@@ -5,10 +5,16 @@ import { RightSideIcon } from "@/svg/RightSideIcon";
 import { ExpenseList } from "./ExpenseList";
 
 export const RightSide = ({ records, colors, icons, category }) => {
-  console.log("records shuu", records);
-  console.log("colors shuu", colors);
-  console.log("icons shuu", icons);
-  console.log("category shuu", category);
+  console.log(records);
+  // console.log(category);
+  const filteredArray = category
+    .filter((cat) => records.some((rec) => rec.category_id == cat.id))
+    .map((item) => ({
+      categoryName: item.name,
+      categoryIcon: item.category_icon,
+      categoryColor: item.icon_color,
+    }));
+  console.log(filteredArray);
 
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
@@ -37,7 +43,7 @@ export const RightSide = ({ records, colors, icons, category }) => {
                   <HomeIcon />
                   <div className="flex flex-col gap">
                     <p className="text-[16px] font-[400] leading-6">
-                      Rent&Housing
+                      {filteredArray.map((filter) => filter.categoryName)}
                     </p>
                     <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
                       {record?.time}
