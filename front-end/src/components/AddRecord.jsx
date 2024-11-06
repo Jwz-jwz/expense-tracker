@@ -53,7 +53,7 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
     };
     const response = await fetch(`${BACKEND_ENDPOINT}/record`, options);
     const data = await response.json();
-    // setRecords((prevRecords) => [...prevRecords, data]);
+    setRecords((prevRecs) => [...prevRecs, data]);
     document.getElementById("my_modal_3").close();
   };
 
@@ -132,7 +132,7 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
                     onChange={handleInputValue}
                     name="amount"
                     placeholder="₮ 000.00"
-                    type="text"
+                    type="amount"
                     className="bg-[#F3F4F6]"
                   />
                 </div>

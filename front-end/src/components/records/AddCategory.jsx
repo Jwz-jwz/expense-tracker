@@ -1,35 +1,3 @@
-import {
-  EighteenthIcon,
-  EightIcon,
-  EleventhIcon,
-  FifteenthIcon,
-  FifthIcon,
-  Fourteenth,
-  FourthIcon,
-  HomeIcon,
-  NineteenthIcon,
-  NinethIcon,
-  SecondIcon,
-  SeventeenthIcon,
-  SeventhIcon,
-  SixteenthIcon,
-  Sixthcon,
-  TenthIcon,
-  ThirdIcon,
-  ThirteenthIcon,
-  ThirtiethIcon,
-  TwelfthIcon,
-  TwentiethIcon,
-  TwentyEighticon,
-  TwentyFifthIcon,
-  TwentyFirstIcon,
-  TwentyFourthIcon,
-  TwentyNinethIcon,
-  TwentySecondIcon,
-  TwentySeventhIcon,
-  TwentySixthIcon,
-  TwentyThirdIcon,
-} from "@/svg";
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { useState } from "react";
@@ -41,7 +9,6 @@ export const AddCategory = ({ colors, icons, setCategory }) => {
   const [bgColor, setBgColor] = useState("#F3F4F6");
   const [bgIcon, setBgIcon] = useState("HomeIcon");
   const [categoryName, setCategoryName] = useState("");
-  // const [newCategory, setNewCategory] = useState([]);
 
   const handleColor = (color) => {
     return setBgColor(color);
