@@ -108,8 +108,13 @@ app.post("/record", async (request, response) => {
 app.get("/record", async (request, response) => {
   try {
     const allRecords = await sql`SELECT * FROM record `;
+    // const allCategory = await sql`SELECT * FROM category`;
 
-    response.status(200).json({ message: "All records", data: allRecords });
+    response.status(200).json({
+      message: "All records",
+      data: allRecords,
+      // category: resCategory,
+    });
   } catch (error) {
     console.log(error);
   }
