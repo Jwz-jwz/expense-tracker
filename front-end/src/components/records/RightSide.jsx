@@ -2,19 +2,52 @@ import { FoodIcon } from "@/svg/FoodIcon";
 import { HomeIcon } from "@/svg/HomeIcon";
 import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
-import { ExpenseList } from "./ExpenseList";
+import { isToday } from "date-fns";
 
 export const RightSide = ({ records, colors, icons, category }) => {
-  console.log(records);
-  // console.log(category);
-  const filteredArray = category
-    .filter((cat) => records.some((rec) => rec.category_id == cat.id))
-    .map((item) => ({
-      categoryName: item.name,
-      categoryIcon: item.category_icon,
-      categoryColor: item.icon_color,
-    }));
-  console.log(filteredArray);
+  // const filteredArray = records
+  //   ?.filter((rec) =>
+  //     category?.some((cat) => {
+  //       if (cat?.id == rec?.category_id) {
+  //         const newarray = {
+  //           recAmount: rec.amount,
+  //           recTime: rec.time,
+  //           recDate: rec.date,
+  //           transaction_type: rec.transaction_type,
+  //           iconColor: cat.icon_color,
+  //           catName: cat.name,
+  //           catIcon: cat.category_icon,
+  //         };
+  //         return newarray;
+  //         // console.log(newarray);
+  //       }
+  //     })
+  //   )
+  //   .map((newcat) => {
+  //     newcat;
+  //   });
+
+  const filteredArray = records
+    ?.filter((rec) => category?.some((cat) => cat?.id === rec?.category_id))
+    .map((rec) => {
+      // Find the category for this record
+      const cat = category.find((cat) => cat?.id === rec?.category_id);
+
+      if (cat) {
+        // Return the transformed object
+        return {
+          recAmount: rec.amount,
+          recTime: rec.time,
+          recDate: rec.date,
+          transaction_type: rec.transaction_type,
+          iconColor: cat.icon_color,
+          catName: cat.name,
+          catIcon: cat.category_icon,
+        };
+      }
+    });
+
+  console.log("new filtered array", filteredArray);
 
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
@@ -33,42 +66,47 @@ export const RightSide = ({ records, colors, icons, category }) => {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <h1 className="text-[16px] font-[600] leading-6 ">Today</h1>
-          {records?.map((record) => {
+          {filteredArray?.map((array, index) => {
             return (
               <div
-                key={record.id}
-                className="flex justify-between px-6 py-4 bg-white rounded-[12px]"
+                key={index}
+                className="flex items-center justify-between px-6 py-4 bg-white rounded-[12px]"
               >
                 <div className="flex gap-4">
-                  <HomeIcon />
-                  <div className="flex flex-col gap">
+                  <div
+                    className="rounded-full w-10 h-10"
+                    style={{ backgroundColor: array.iconColor }}
+                  >
+                    {icons?.find((icon) => {
+                      icon?.name === array?.catIcon;
+                    })}
+                  </div>
+                  <div className="flex flex-col gap-1 justify-center ">
                     <p className="text-[16px] font-[400] leading-6">
-                      {filteredArray.map((filter) => filter.categoryName)}
+                      {array.catName}
                     </p>
                     <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
-                      {record?.time}
+                      {array?.recTime}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-[#84CC16] text-[16px] font-[600] leading-6">
-                  <p>+</p>
-                  <p>{record?.amount}</p>
+                <div
+                  className={`flex items-center gap-2 ${
+                    array?.transaction_type == "INC"
+                      ? "text-[#84CC16]"
+                      : "text-[red]"
+                  }  text-[16px] font-[600] leading-6`}
+                >
+                  {/* <p>+</p> */}
+                  <p>{array.transaction_type == "INC" ? "+" : "-"}</p>
+                  <p className="number">{array?.recAmount}₮</p>
                 </div>
               </div>
             );
           })}
-          {/* <ExpenseList />
-          <ExpenseList />
-          <ExpenseList />
-          <ExpenseList /> */}
         </div>
         <div className="flex flex-col gap-3">
           <h1 className="text-[16px] font-[600] leading-6 ">Yesterday</h1>
-          {/* <ExpenseList />
-          <ExpenseList />
-          <ExpenseList />
-          <ExpenseList />
-          <ExpenseList /> */}
         </div>
       </div>
     </div>

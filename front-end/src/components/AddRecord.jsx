@@ -141,9 +141,6 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
 
                   <select
                     onChange={selectCategory}
-                    // onChange={() => {
-                    //   selectCategory(categorySingle?.id);
-                    // }}
                     className="select select-bordered w-full bg-[#F3F4F6]"
                   >
                     <option value="" defaultValue>
