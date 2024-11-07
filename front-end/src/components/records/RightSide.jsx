@@ -114,7 +114,7 @@ export const RightSide = ({ records, clickedCatName }) => {
                       {record.name}
                     </p>
                     <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
-                      {record?.time}
+                      {record?.date}
                     </p>
                   </div>
                 </div>

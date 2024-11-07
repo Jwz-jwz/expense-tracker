@@ -2,7 +2,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
-export const ChartHero = () => {
+export const ChartHero = ({ dashboardRecords }) => {
   const data = {
     labels: ["Bills", "Food", "Shopping", "Insurance", "Clothing"],
 

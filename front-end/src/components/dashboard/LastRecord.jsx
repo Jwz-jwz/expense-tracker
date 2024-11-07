@@ -88,7 +88,7 @@ export const Lastrecord = ({ dashboardRecords }) => {
               >
                 {icon[record?.category_icon]}
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <p className="text-[16px] font-[400] leading-6">
                   {record?.name}
                 </p>

@@ -30,7 +30,7 @@ export const Dashboard = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center bg-[#F3F4F6] gap-6 pb-[40px]">
         <HeroDashboard />
-        <ChartHero />
+        <ChartHero dashboardRecords={dashboardRecords} />
         <Lastrecord dashboardRecords={dashboardRecords} />
       </div>
     </div>

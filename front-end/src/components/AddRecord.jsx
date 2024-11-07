@@ -84,7 +84,9 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
         }}
       >
         <WhitePlusIcon />
-        <p className="text-[12px] leading-4 font-[400] text-[white]">Add</p>
+        <p className="text-[12px] leading-4 font-[400] text-[white]">
+          Add Record
+        </p>
       </button>
       <dialog id="my_modal_3" className="modal ">
         <div className="bg-white rounded-xl p-0 w-[792px]">
