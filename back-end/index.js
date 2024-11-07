@@ -116,13 +116,13 @@ app.get("/transaction", async (request, response) => {
       allRecords =
         await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
       FROM category
-      JOIN record ON record.category_id=category.id;`;
+      JOIN record ON record.category_id=category.id ORDER BY record.date DESC;`;
     } else {
       allRecords =
         await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
       FROM category
       JOIN record ON record.category_id=category.id
-      WHERE transaction_type=${transactionType};`;
+      WHERE transaction_type=${transactionType} ORDER BY record.date DESC;`;
     }
 
     response.status(200).json({
@@ -138,7 +138,7 @@ app.get("/dashboard", async (request, response) => {
     const allRecords =
       await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
       FROM category
-      JOIN record ON record.category_id=category.id;`;
+      JOIN record ON record.category_id=category.id ORDER BY record.date DESC;`;
     const shorRecords = allRecords.slice(0, 5);
     response.status(200).json({ message: "All category", data: shorRecords });
   } catch (error) {
