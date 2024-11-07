@@ -41,6 +41,7 @@ import { useEffect, useState } from "react";
 export const Records = () => {
   const [category, setCategory] = useState([]);
   const [records, setRecords] = useState([]);
+  const [transactionType, setTransactionType] = useState("");
 
   const fetchCategories = async () => {
     try {
@@ -54,7 +55,9 @@ export const Records = () => {
 
   const fetchRecords = async () => {
     try {
-      const response = await fetch(`${BACKEND_ENDPOINT}/record`);
+      const response = await fetch(
+        `${BACKEND_ENDPOINT}/transaction?transactionType=${transactionType}`
+      );
       const data = await response.json();
       setRecords(data.data);
     } catch (error) {
@@ -62,10 +65,14 @@ export const Records = () => {
     }
   };
 
+  const transactType = (value) => {
+    setTransactionType(value);
+  };
+
   useEffect(() => {
     fetchCategories();
     fetchRecords();
-  }, []);
+  }, [transactionType]);
 
   const colors = [
     { id: 1, color: "#0166FF" },
@@ -126,13 +133,9 @@ export const Records = () => {
             icons={icons}
             setCategory={setCategory}
             setRecords={setRecords}
+            transactType={transactType}
           />
-          <RightSide
-            category={category}
-            records={records}
-            colors={colors}
-            icons={icons}
-          />
+          <RightSide category={category} records={records} />
         </div>
       </div>
     </div>

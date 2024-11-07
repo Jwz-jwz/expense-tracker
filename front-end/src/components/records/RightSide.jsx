@@ -1,40 +1,46 @@
-import { FoodIcon } from "@/svg/FoodIcon";
+import {
+  EighteenthIcon,
+  EightIcon,
+  EleventhIcon,
+  FifteenthIcon,
+  FifthIcon,
+  Fourteenth,
+  FourthIcon,
+  NineteenthIcon,
+  NinethIcon,
+  SecondIcon,
+  SeventeenthIcon,
+  SeventhIcon,
+  SixteenthIcon,
+  Sixthcon,
+  TenthIcon,
+  ThirdIcon,
+  ThirteenthIcon,
+  ThirtiethIcon,
+  TwelfthIcon,
+  TwentiethIcon,
+  TwentyEighticon,
+  TwentyFifthIcon,
+  TwentyFirstIcon,
+  TwentyFourthIcon,
+  TwentyNinethIcon,
+  TwentySecondIcon,
+  TwentySeventhIcon,
+  TwentySixthIcon,
+  TwentyThirdIcon,
+} from "@/svg";
+
 import { HomeIcon } from "@/svg/HomeIcon";
 import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
-import { isToday } from "date-fns";
 
-export const RightSide = ({ records, colors, icons, category }) => {
-  // const filteredArray = records
-  //   ?.filter((rec) =>
-  //     category?.some((cat) => {
-  //       if (cat?.id == rec?.category_id) {
-  //         const newarray = {
-  //           recAmount: rec.amount,
-  //           recTime: rec.time,
-  //           recDate: rec.date,
-  //           transaction_type: rec.transaction_type,
-  //           iconColor: cat.icon_color,
-  //           catName: cat.name,
-  //           catIcon: cat.category_icon,
-  //         };
-  //         return newarray;
-  //         // console.log(newarray);
-  //       }
-  //     })
-  //   )
-  //   .map((newcat) => {
-  //     newcat;
-  //   });
-
+export const RightSide = ({ records, category, transactionType }) => {
   const filteredArray = records
     ?.filter((rec) => category?.some((cat) => cat?.id === rec?.category_id))
     .map((rec) => {
-      // Find the category for this record
       const cat = category.find((cat) => cat?.id === rec?.category_id);
 
       if (cat) {
-        // Return the transformed object
         return {
           recAmount: rec.amount,
           recTime: rec.time,
@@ -47,7 +53,50 @@ export const RightSide = ({ records, colors, icons, category }) => {
       }
     });
 
-  console.log("new filtered array", filteredArray);
+  // const incomeTypeArray = filteredArray.filter(
+  //   (array) => array.transaction_type === "INC"
+  // );
+  // const expenseTypeArray = filteredArray.filter(
+  //   (array) => array.transaction_type === "EXP"
+  // );
+
+  // console.log("new filtered array", filteredArray);
+  const icon = {
+    HomeIcon: <HomeIcon />,
+    SecondIcon: <SecondIcon />,
+    ThirdIcon: <ThirdIcon />,
+    FourthIcon: <FourthIcon />,
+    FifthIcon: <FifthIcon />,
+    Sixthcon: <Sixthcon />,
+    SeventhIcon: <SeventhIcon />,
+    EightIcon: <EightIcon />,
+    NinethIcon: <NinethIcon />,
+    TenthIcon: <TenthIcon />,
+    EleventhIcon: <EleventhIcon />,
+    TwelfthIcon: <TwelfthIcon />,
+    ThirteenthIcon: <ThirteenthIcon />,
+    Fourteenth: <Fourteenth />,
+    FifteenthIcon: <FifteenthIcon />,
+    SixteenthIcon: <SixteenthIcon />,
+    SeventeenthIcon: <SeventeenthIcon />,
+    EighteenthIcon: <EighteenthIcon />,
+    NineteenthIcon: <NineteenthIcon />,
+    TwentiethIcon: <TwentiethIcon />,
+    TwentyFirstIcon: <TwentyFirstIcon />,
+    TwentySecondIcon: <TwentySecondIcon />,
+    TwentyThirdIcon: <TwentyThirdIcon />,
+    TwentyFourthIcon: <TwentyFourthIcon />,
+    TwentyFifthIcon: <TwentyFifthIcon />,
+    TwentySixthIcon: <TwentySixthIcon />,
+
+    TwentySeventhIcon: <TwentySeventhIcon />,
+
+    TwentyEighticon: <TwentyEighticon />,
+    TwentyNinethIcon: <TwentyNinethIcon />,
+    ThirtiethIcon: <ThirtiethIcon />,
+  };
+
+  // console.log(icons["HomeIcon"]);
 
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
@@ -66,7 +115,7 @@ export const RightSide = ({ records, colors, icons, category }) => {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <h1 className="text-[16px] font-[600] leading-6 ">Today</h1>
-          {filteredArray?.map((array, index) => {
+          {filteredArray?.map((record, index) => {
             return (
               <div
                 key={index}
@@ -74,32 +123,30 @@ export const RightSide = ({ records, colors, icons, category }) => {
               >
                 <div className="flex gap-4">
                   <div
-                    className="rounded-full w-10 h-10"
-                    style={{ backgroundColor: array.iconColor }}
+                    className="rounded-full w-10 h-10 flex justify-center items-center"
+                    style={{ backgroundColor: record.iconColor }}
                   >
-                    {icons?.find((icon) => {
-                      icon?.name === array?.catIcon;
-                    })}
+                    {icon[record?.catIcon]}
                   </div>
                   <div className="flex flex-col gap-1 justify-center ">
                     <p className="text-[16px] font-[400] leading-6">
-                      {array.catName}
+                      {record.catName}
                     </p>
                     <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
-                      {array?.recTime}
+                      {record?.recTime}
                     </p>
                   </div>
                 </div>
                 <div
                   className={`flex items-center gap-2 ${
-                    array?.transaction_type == "INC"
+                    record?.transaction_type == "INC"
                       ? "text-[#84CC16]"
                       : "text-[red]"
                   }  text-[16px] font-[600] leading-6`}
                 >
                   {/* <p>+</p> */}
-                  <p>{array.transaction_type == "INC" ? "+" : "-"}</p>
-                  <p className="number">{array?.recAmount}₮</p>
+                  <p>{record.transaction_type == "INC" ? "+" : "-"}</p>
+                  <p className="number">{record?.recAmount}₮</p>
                 </div>
               </div>
             );

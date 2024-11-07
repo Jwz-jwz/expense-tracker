@@ -22,7 +22,7 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${BACKEND_ENDPOINT}/category`);
+      const response = await fetch(`${BACKEND_ENDPOINT}/category `);
       const data = await response.json();
       setCategory(data?.data);
       // setCategory((prevCategory) => [...prevCategory, ...data?.data]);

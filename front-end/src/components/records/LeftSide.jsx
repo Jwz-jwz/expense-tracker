@@ -11,10 +11,14 @@ export const LeftSide = ({
   icons,
   setCategory,
   setRecords,
+  transactType,
 }) => {
   const [isClicked, setIsClicked] = useState(true);
-  const handleIcon = () => {
-    setIsClicked(!isClicked);
+  const [clickedCatName, setClickedCatName] = useState("");
+
+  const handleIcon = (name) => {
+    // setIsClicked(!isClicked);
+    setClickedCatName(name, !isClicked);
   };
 
   return (
@@ -36,6 +40,7 @@ export const LeftSide = ({
         <div className="flex flex-col gap-1 ml-[20px]">
           <div className="flex gap-[15px] items-center">
             <input
+              onClick={() => transactType("All")}
               type="radio"
               name="radio-1"
               className="radio w-[15px] h-[15px]"
@@ -45,6 +50,7 @@ export const LeftSide = ({
           </div>
           <div className="flex gap-[15px] items-center">
             <input
+              onClick={() => transactType("INC")}
               type="radio"
               name="radio-1"
               className="radio w-[15px] h-[15px]"
@@ -53,6 +59,7 @@ export const LeftSide = ({
           </div>
           <div className="flex gap-[15px] items-center">
             <input
+              onClick={() => transactType("EXP")}
               type="radio"
               name="radio-1"
               className="radio w-[15px] h-[15px]"
@@ -81,9 +88,9 @@ export const LeftSide = ({
                   key={category?.id}
                   className="flex gap-[10px] items-center"
                 >
-                  {isClicked ? <EyeIcon /> : <NotEye />}
+                  {clickedCatName === category.name ? <EyeIcon /> : <NotEye />}
                   <button
-                    onClick={handleIcon}
+                    onClick={() => handleIcon(category?.name)}
                     className="text-[16buttonx] font-[400] leading-6"
                   >
                     {category?.name}
