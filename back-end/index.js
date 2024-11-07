@@ -105,15 +105,45 @@ app.post("/record", async (request, response) => {
   }
 });
 
-app.get("/record", async (request, response) => {
-  try {
-    const allRecords = await sql`SELECT * FROM record `;
-    // const allCategory = await sql`SELECT * FROM category`;
+app.get("/transaction", async (request, response) => {
+  const { transactionType } = request.query;
 
+  const newTemp = transactionType.replace(/"/g, "'");
+
+  try {
+    if (transactionType === "ALL") {
+      const allRecords = await sql`SELECT * FROM record ;`;
+    }
+    const allRecords =
+      await sql`SELECT * FROM record WHERE transaction_type = ${newTemp} ;`;
+
+    // await sql`SELECT * FROM record`;
+    // const allCategory = await sql`SELECT * FROM category;`;
+
+    // const filteredArray = allRecords
+    //   ?.filter((rec) =>
+    //     allCategory?.some((cat) => cat?.id === rec?.category_id)
+    //   )
+    //   .map((rec) => {
+    //     // Find the category for this record
+    //     const cat = allCategory.find((cat) => cat?.id === rec?.category_id);
+
+    //     if (cat) {
+    //       // Return the transformed object
+    //       return {
+    //         recAmount: rec.amount,
+    //         recTime: rec.time,
+    //         recDate: rec.date,
+    //         transaction_type: rec.transaction_type,
+    //         iconColor: cat.icon_color,
+    //         catName: cat.name,
+    //         catIcon: cat.category_icon,
+    //       };
+    //     }
+    //   });
     response.status(200).json({
       message: "All records",
       data: allRecords,
-      // category: resCategory,
     });
   } catch (error) {
     console.log(error);
