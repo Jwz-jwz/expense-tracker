@@ -1,20 +1,18 @@
 import { BluePlusIcon } from "@/svg/BluePlusIcon";
 import { CategoryArrow } from "@/svg/CategoryArrow";
 import { useState } from "react";
-
 import { BACKEND_ENDPOINT } from "@/constants/constant";
-import Home from "@/app/page";
 
-export const AddCategory = ({ colors, icons, setCategory }) => {
+export const AddCategory = ({ colors, icons, setCategory, setOngo }) => {
   const [bgColor, setBgColor] = useState("#F3F4F6");
   const [bgIcon, setBgIcon] = useState("HomeIcon");
   const [categoryName, setCategoryName] = useState("");
 
   const handleColor = (color) => {
-    return setBgColor(color);
+    return setBgColor(color), setOngo(color);
   };
 
-  const handleIcon = (iconName) => {
+  const handleCatIcon = (iconName) => {
     return setBgIcon(iconName);
   };
 
@@ -37,6 +35,8 @@ export const AddCategory = ({ colors, icons, setCategory }) => {
       const data = await response.json();
       // state change
       setCategory((prevCats) => [...prevCats, data]);
+      setBgColor("#F3F4F6");
+      setBgIcon("HomeIcon");
     } catch (error) {
       console.log("error");
     }
@@ -44,11 +44,6 @@ export const AddCategory = ({ colors, icons, setCategory }) => {
   };
 
   const defaultIcon = icons?.find((icon) => icon?.name === bgIcon);
-  // icons.find((icon) => {
-  //   if (icon.name == bgIcon) {
-  //     return icon.icon;
-  //   }
-  // });
 
   return (
     <div>
@@ -70,10 +65,7 @@ export const AddCategory = ({ colors, icons, setCategory }) => {
           <div className="py-[24px] px-[20px] flex flex-col gap-8">
             <div className="flex justify-between w-[446px] items-center">
               <details className="dropdown">
-                <summary
-                  style={{ backgroundColor: bgColor }}
-                  className={`btn m-1 ] flex flex-col`}
-                >
+                <summary className={`btn m-1 ] flex flex-col`}>
                   {defaultIcon?.icon}
                   <CategoryArrow />
                 </summary>
@@ -86,7 +78,7 @@ export const AddCategory = ({ colors, icons, setCategory }) => {
                       return (
                         <button
                           onClick={() => {
-                            handleIcon(icon?.name);
+                            handleCatIcon(icon?.name);
                           }}
                           key={index}
                         >

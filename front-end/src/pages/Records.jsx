@@ -41,7 +41,10 @@ import { useEffect, useState } from "react";
 export const Records = () => {
   const [category, setCategory] = useState([]);
   const [records, setRecords] = useState([]);
-  const [transactionType, setTransactionType] = useState("");
+  const [transactionType, setTransactionType] = useState("ALL");
+  const [ongo, setOngo] = useState("#343330");
+  const [clickedCatName, setClickedCatName] = useState("");
+  const [isClicked, setIsClicked] = useState(true);
 
   const fetchCategories = async () => {
     try {
@@ -68,6 +71,13 @@ export const Records = () => {
   const transactType = (value) => {
     setTransactionType(value);
   };
+  const handleIcon = (name) => {
+    setClickedCatName(name, !isClicked);
+  };
+  const handleClearButton = () => {
+    setClickedCatName(!isClicked);
+    setClickedCatName("");
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -85,39 +95,38 @@ export const Records = () => {
   ];
 
   const icons = [
-    { name: "HomeIcon", icon: <HomeIcon /> },
-    { name: "SecondIcon", icon: <SecondIcon /> },
-    { name: "ThirdIcon", icon: <ThirdIcon /> },
-    { name: "FourthIcon", icon: <FourthIcon /> },
-    { name: "FifthIcon", icon: <FifthIcon /> },
-    { name: "Sixthcon", icon: <Sixthcon /> },
-    { name: "SeventhIcon", icon: <SeventhIcon /> },
-    { name: "EightIcon", icon: <EightIcon /> },
-    { name: "NinethIcon", icon: <NinethIcon /> },
-    { name: "TenthIcon", icon: <TenthIcon /> },
-    { name: "EleventhIcon", icon: <EleventhIcon /> },
-    { name: "TwelfthIcon", icon: <TwelfthIcon /> },
-    { name: "ThirteenthIcon", icon: <ThirteenthIcon /> },
-    { name: "Fourteenth", icon: <Fourteenth /> },
-    { name: "FifteenthIcon", icon: <FifteenthIcon /> },
-    { name: "SixteenthIcon", icon: <SixteenthIcon /> },
-    { name: "SeventeenthIcon", icon: <SeventeenthIcon /> },
-    { name: "EighteenthIcon", icon: <EighteenthIcon /> },
-    { name: "NineteenthIcon", icon: <NineteenthIcon /> },
-    { name: "TwentiethIcon", icon: <TwentiethIcon /> },
-    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon /> },
-    { name: "TwentySecondIcon", icon: <TwentySecondIcon /> },
-    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon /> },
-    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon /> },
-    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon /> },
-    { name: "TwentySixthIcon", icon: <TwentySixthIcon /> },
+    { name: "HomeIcon", icon: <HomeIcon color={ongo} /> },
+    { name: "SecondIcon", icon: <SecondIcon color={ongo} /> },
+    { name: "ThirdIcon", icon: <ThirdIcon color={ongo} /> },
+    { name: "FourthIcon", icon: <FourthIcon color={ongo} /> },
+    { name: "FifthIcon", icon: <FifthIcon color={ongo} /> },
+    { name: "Sixthcon", icon: <Sixthcon color={ongo} /> },
+    { name: "SeventhIcon", icon: <SeventhIcon color={ongo} /> },
+    { name: "EightIcon", icon: <EightIcon color={ongo} /> },
+    { name: "NinethIcon", icon: <NinethIcon color={ongo} /> },
+    { name: "TenthIcon", icon: <TenthIcon color={ongo} /> },
+    { name: "EleventhIcon", icon: <EleventhIcon color={ongo} /> },
+    { name: "ThirteenthIcon", icon: <ThirteenthIcon color={ongo} /> },
+    { name: "Fourteenth", icon: <Fourteenth color={ongo} /> },
+    { name: "FifteenthIcon", icon: <FifteenthIcon color={ongo} /> },
+    { name: "SixteenthIcon", icon: <SixteenthIcon color={ongo} /> },
+    { name: "SeventeenthIcon", icon: <SeventeenthIcon color={ongo} /> },
+    { name: "EighteenthIcon", icon: <EighteenthIcon color={ongo} /> },
+    { name: "NineteenthIcon", icon: <NineteenthIcon color={ongo} /> },
+    { name: "TwentiethIcon", icon: <TwentiethIcon color={ongo} /> },
+    { name: "TwentyFirstIcon", icon: <TwentyFirstIcon color={ongo} /> },
+    { name: "TwentySecondIcon", icon: <TwentySecondIcon color={ongo} /> },
+    { name: "TwentyThirdIcon", icon: <TwentyThirdIcon color={ongo} /> },
+    { name: "TwentyFourthIcon", icon: <TwentyFourthIcon color={ongo} /> },
+    { name: "TwentyFifthIcon", icon: <TwentyFifthIcon color={ongo} /> },
+    { name: "TwentySixthIcon", icon: <TwentySixthIcon color={ongo} /> },
     {
       name: "TwentySeventhIcon",
-      icon: <TwentySeventhIcon />,
+      icon: <TwentySeventhIcon color={ongo} />,
     },
-    { name: "TwentyEighticon", icon: <TwentyEighticon /> },
-    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon /> },
-    { name: "ThirtiethIcon", icon: <ThirtiethIcon /> },
+    { name: "TwentyEighticon", icon: <TwentyEighticon color={ongo} /> },
+    { name: "TwentyNinethIcon", icon: <TwentyNinethIcon color={ongo} /> },
+    { name: "ThirtiethIcon", icon: <ThirtiethIcon color={ongo} /> },
   ];
 
   return (
@@ -134,8 +143,16 @@ export const Records = () => {
             setCategory={setCategory}
             setRecords={setRecords}
             transactType={transactType}
+            setOngo={setOngo}
+            handleIcon={handleIcon}
+            clickedCatName={clickedCatName}
+            handleClearButton={handleClearButton}
           />
-          <RightSide category={category} records={records} />
+          <RightSide
+            category={category}
+            records={records}
+            clickedCatName={clickedCatName}
+          />
         </div>
       </div>
     </div>

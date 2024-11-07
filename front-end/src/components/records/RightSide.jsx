@@ -34,69 +34,50 @@ import { HomeIcon } from "@/svg/HomeIcon";
 import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
 
-export const RightSide = ({ records, category, transactionType }) => {
-  const filteredArray = records
-    ?.filter((rec) => category?.some((cat) => cat?.id === rec?.category_id))
-    .map((rec) => {
-      const cat = category.find((cat) => cat?.id === rec?.category_id);
+export const RightSide = ({ records, clickedCatName }) => {
+  let filteredRecords = [];
+  if (!clickedCatName) {
+    filteredRecords = records;
+  } else {
+    filteredRecords = records?.filter(
+      (record) => record?.name === clickedCatName
+    );
+  }
 
-      if (cat) {
-        return {
-          recAmount: rec.amount,
-          recTime: rec.time,
-          recDate: rec.date,
-          transaction_type: rec.transaction_type,
-          iconColor: cat.icon_color,
-          catName: cat.name,
-          catIcon: cat.category_icon,
-        };
-      }
-    });
-
-  // const incomeTypeArray = filteredArray.filter(
-  //   (array) => array.transaction_type === "INC"
-  // );
-  // const expenseTypeArray = filteredArray.filter(
-  //   (array) => array.transaction_type === "EXP"
-  // );
-
-  // console.log("new filtered array", filteredArray);
   const icon = {
-    HomeIcon: <HomeIcon />,
-    SecondIcon: <SecondIcon />,
-    ThirdIcon: <ThirdIcon />,
-    FourthIcon: <FourthIcon />,
-    FifthIcon: <FifthIcon />,
-    Sixthcon: <Sixthcon />,
-    SeventhIcon: <SeventhIcon />,
-    EightIcon: <EightIcon />,
-    NinethIcon: <NinethIcon />,
-    TenthIcon: <TenthIcon />,
-    EleventhIcon: <EleventhIcon />,
-    TwelfthIcon: <TwelfthIcon />,
-    ThirteenthIcon: <ThirteenthIcon />,
-    Fourteenth: <Fourteenth />,
-    FifteenthIcon: <FifteenthIcon />,
-    SixteenthIcon: <SixteenthIcon />,
-    SeventeenthIcon: <SeventeenthIcon />,
-    EighteenthIcon: <EighteenthIcon />,
-    NineteenthIcon: <NineteenthIcon />,
-    TwentiethIcon: <TwentiethIcon />,
-    TwentyFirstIcon: <TwentyFirstIcon />,
-    TwentySecondIcon: <TwentySecondIcon />,
-    TwentyThirdIcon: <TwentyThirdIcon />,
-    TwentyFourthIcon: <TwentyFourthIcon />,
-    TwentyFifthIcon: <TwentyFifthIcon />,
-    TwentySixthIcon: <TwentySixthIcon />,
+    HomeIcon: <HomeIcon color={"#FFFFFF"} />,
+    SecondIcon: <SecondIcon color={"#FFFFFF"} />,
+    ThirdIcon: <ThirdIcon color={"#FFFFFF"} />,
+    FourthIcon: <FourthIcon color={"#FFFFFF"} />,
+    FifthIcon: <FifthIcon color={"#FFFFFF"} />,
+    Sixthcon: <Sixthcon color={"#FFFFFF"} />,
+    SeventhIcon: <SeventhIcon color={"#FFFFFF"} />,
+    EightIcon: <EightIcon color={"#FFFFFF"} />,
+    NinethIcon: <NinethIcon color={"#FFFFFF"} />,
+    TenthIcon: <TenthIcon color={"#FFFFFF"} />,
+    EleventhIcon: <EleventhIcon color={"#FFFFFF"} />,
+    TwelfthIcon: <TwelfthIcon color={"#FFFFFF"} />,
+    ThirteenthIcon: <ThirteenthIcon color={"#FFFFFF"} />,
+    Fourteenth: <Fourteenth color={"#FFFFFF"} />,
+    FifteenthIcon: <FifteenthIcon color={"#FFFFFF"} />,
+    SixteenthIcon: <SixteenthIcon color={"#FFFFFF"} />,
+    SeventeenthIcon: <SeventeenthIcon color={"#FFFFFF"} />,
+    EighteenthIcon: <EighteenthIcon color={"#FFFFFF"} />,
+    NineteenthIcon: <NineteenthIcon color={"#FFFFFF"} />,
+    TwentiethIcon: <TwentiethIcon color={"#FFFFFF"} />,
+    TwentyFirstIcon: <TwentyFirstIcon color={"#FFFFFF"} />,
+    TwentySecondIcon: <TwentySecondIcon color={"#FFFFFF"} />,
+    TwentyThirdIcon: <TwentyThirdIcon color={"#FFFFFF"} />,
+    TwentyFourthIcon: <TwentyFourthIcon color={"#FFFFFF"} />,
+    TwentyFifthIcon: <TwentyFifthIcon color={"#FFFFFF"} />,
+    TwentySixthIcon: <TwentySixthIcon color={"#FFFFFF"} />,
 
-    TwentySeventhIcon: <TwentySeventhIcon />,
+    TwentySeventhIcon: <TwentySeventhIcon color={"#FFFFFF"} />,
 
-    TwentyEighticon: <TwentyEighticon />,
-    TwentyNinethIcon: <TwentyNinethIcon />,
-    ThirtiethIcon: <ThirtiethIcon />,
+    TwentyEighticon: <TwentyEighticon color={"#FFFFFF"} />,
+    TwentyNinethIcon: <TwentyNinethIcon color={"#FFFFFF"} />,
+    ThirtiethIcon: <ThirtiethIcon color={"#FFFFFF"} />,
   };
-
-  // console.log(icons["HomeIcon"]);
 
   return (
     <div className="w-full flex flex-col gap-4 mt-8">
@@ -115,7 +96,7 @@ export const RightSide = ({ records, category, transactionType }) => {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <h1 className="text-[16px] font-[600] leading-6 ">Today</h1>
-          {filteredArray?.map((record, index) => {
+          {filteredRecords?.map((record, index) => {
             return (
               <div
                 key={index}
@@ -124,16 +105,16 @@ export const RightSide = ({ records, category, transactionType }) => {
                 <div className="flex gap-4">
                   <div
                     className="rounded-full w-10 h-10 flex justify-center items-center"
-                    style={{ backgroundColor: record.iconColor }}
+                    style={{ backgroundColor: record.icon_color }}
                   >
-                    {icon[record?.catIcon]}
+                    {icon[record?.category_icon]}
                   </div>
                   <div className="flex flex-col gap-1 justify-center ">
                     <p className="text-[16px] font-[400] leading-6">
-                      {record.catName}
+                      {record.name}
                     </p>
                     <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
-                      {record?.recTime}
+                      {record?.time}
                     </p>
                   </div>
                 </div>
@@ -146,7 +127,7 @@ export const RightSide = ({ records, category, transactionType }) => {
                 >
                   {/* <p>+</p> */}
                   <p>{record.transaction_type == "INC" ? "+" : "-"}</p>
-                  <p className="number">{record?.recAmount}₮</p>
+                  <p className="number">{record?.amount}₮</p>
                 </div>
               </div>
             );

@@ -53,7 +53,7 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
     };
     const response = await fetch(`${BACKEND_ENDPOINT}/record`, options);
     const data = await response.json();
-    setRecords((prevRecs) => [...prevRecs, data]);
+    // setRecords((prevRecs) => [...prevRecs, data]);
     document.getElementById("my_modal_3").close();
   };
 

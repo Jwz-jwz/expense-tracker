@@ -1,4 +1,4 @@
-export const NineteenthIcon = () => {
+export const NineteenthIcon = ({ color }) => {
   return (
     <div className="flex justify-center items-center">
       <svg

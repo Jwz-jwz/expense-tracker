@@ -6,21 +6,17 @@ import { useState } from "react";
 import { NotEye } from "@/svg/NotEye";
 
 export const LeftSide = ({
+  setOngo,
   categories,
   colors,
   icons,
   setCategory,
   setRecords,
   transactType,
+  handleIcon,
+  clickedCatName,
+  handleClearButton,
 }) => {
-  const [isClicked, setIsClicked] = useState(true);
-  const [clickedCatName, setClickedCatName] = useState("");
-
-  const handleIcon = (name) => {
-    // setIsClicked(!isClicked);
-    setClickedCatName(name, !isClicked);
-  };
-
   return (
     <div className="w-[282px] h-[912px] rounded-xl border border-[#E5E7EB] mt-8 bg-white px-4 py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-6">
@@ -40,7 +36,7 @@ export const LeftSide = ({
         <div className="flex flex-col gap-1 ml-[20px]">
           <div className="flex gap-[15px] items-center">
             <input
-              onClick={() => transactType("All")}
+              onClick={() => transactType("ALL")}
               type="radio"
               name="radio-1"
               className="radio w-[15px] h-[15px]"
@@ -74,7 +70,7 @@ export const LeftSide = ({
             Category
           </h1>
           <button
-            onClick={handleIcon}
+            onClick={handleClearButton}
             className=" text-[16px] font-[400] leading-6"
           >
             Clear
@@ -104,6 +100,7 @@ export const LeftSide = ({
             colors={colors}
             icons={icons}
             setCategory={setCategory}
+            setOngo={setOngo}
           />
         </div>
       </div>
