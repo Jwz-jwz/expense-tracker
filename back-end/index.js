@@ -108,43 +108,39 @@ app.post("/record", async (request, response) => {
 app.get("/transaction", async (request, response) => {
   const { transactionType } = request.query;
 
-  const newTemp = transactionType.replace(/"/g, "'");
+  // const newTemp = transactionType.replace(/"/g, "'");
 
   try {
-    if (transactionType === "ALL") {
-      const allRecords = await sql`SELECT * FROM record ;`;
+    let allRecords = [];
+    if (transactionType == "ALL") {
+      allRecords =
+        await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
+      FROM category
+      JOIN record ON record.category_id=category.id;`;
+    } else {
+      allRecords =
+        await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
+      FROM category
+      JOIN record ON record.category_id=category.id
+      WHERE transaction_type=${transactionType};`;
     }
-    const allRecords =
-      await sql`SELECT * FROM record WHERE transaction_type = ${newTemp} ;`;
 
-    // await sql`SELECT * FROM record`;
-    // const allCategory = await sql`SELECT * FROM category;`;
-
-    // const filteredArray = allRecords
-    //   ?.filter((rec) =>
-    //     allCategory?.some((cat) => cat?.id === rec?.category_id)
-    //   )
-    //   .map((rec) => {
-    //     // Find the category for this record
-    //     const cat = allCategory.find((cat) => cat?.id === rec?.category_id);
-
-    //     if (cat) {
-    //       // Return the transformed object
-    //       return {
-    //         recAmount: rec.amount,
-    //         recTime: rec.time,
-    //         recDate: rec.date,
-    //         transaction_type: rec.transaction_type,
-    //         iconColor: cat.icon_color,
-    //         catName: cat.name,
-    //         catIcon: cat.category_icon,
-    //       };
-    //     }
-    //   });
     response.status(200).json({
       message: "All records",
       data: allRecords,
     });
+  } catch (error) {
+    console.log(error);
+  }
+});
+app.get("/dashboard", async (request, response) => {
+  try {
+    const allRecords =
+      await sql`SELECT record.amount, record.time, record.date, record.transaction_type, record.description, category.icon_color, category.name, category.category_icon
+      FROM category
+      JOIN record ON record.category_id=category.id;`;
+    const shorRecords = allRecords.slice(0, 5);
+    response.status(200).json({ message: "All category", data: shorRecords });
   } catch (error) {
     console.log(error);
   }
