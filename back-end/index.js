@@ -124,7 +124,7 @@ app.get("/transaction", async (request, response) => {
       JOIN record ON record.category_id=category.id
       WHERE transaction_type=${transactionType} ORDER BY record.date DESC;`;
     }
-
+    console.log(allRecords);
     response.status(200).json({
       message: "All records",
       data: allRecords,
@@ -149,3 +149,5 @@ app.get("/dashboard", async (request, response) => {
 app.listen(port, () => {
   console.log(`server ajillaj ehelle http://localhost:${port}`);
 });
+
+// [dsf, fdsfds, sdf];
