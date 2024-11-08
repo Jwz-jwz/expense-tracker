@@ -5,7 +5,7 @@ import { AddCategory } from "./records/AddCategory";
 import { IconArrow } from "./records/IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 
-export const AddRecord = ({ colors, icons, setRecords }) => {
+export const AddRecord = ({ colors, icons, setRecords, text }) => {
   const [isClicked, setIsClicked] = useState(true);
   const [isColor, setIsColor] = useState(true);
   const [transaction, setTransaction] = useState("");
@@ -84,9 +84,7 @@ export const AddRecord = ({ colors, icons, setRecords }) => {
         }}
       >
         <WhitePlusIcon />
-        <p className="text-[12px] leading-4 font-[400] text-[white]">
-          Add Record
-        </p>
+        <p className="text-[12px] leading-4 font-[400] text-[white]">{text}</p>
       </button>
       <dialog id="my_modal_3" className="modal ">
         <div className="bg-white rounded-xl p-0 w-[792px]">

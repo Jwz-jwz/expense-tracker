@@ -21,7 +21,12 @@ export const LeftSide = ({
     <div className="w-[282px] h-[912px] rounded-xl border border-[#E5E7EB] mt-8 bg-white px-4 py-6 flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <h1 className="text-[24px] font-[600] leading-8">Records</h1>
-        <AddRecord colors={colors} icons={icons} setRecords={setRecords} />
+        <AddRecord
+          colors={colors}
+          icons={icons}
+          setRecords={setRecords}
+          text={"Add"}
+        />
         {/* <PlusAdd /> */}
       </div>
       <input

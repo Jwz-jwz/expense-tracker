@@ -67,7 +67,7 @@ export const Lastrecord = ({ dashboardRecords }) => {
     TwentyNinethIcon: <TwentyNinethIcon color={"#FFFFFF"} />,
     ThirtiethIcon: <ThirtiethIcon color={"#FFFFFF"} />,
   };
-  const currentDate = new Date().toDateString();
+  const currentDate = new Date();
   console.log(currentDate);
 
   return (
@@ -105,7 +105,7 @@ export const Lastrecord = ({ dashboardRecords }) => {
               }  text-[16px] font-[600] leading-6`}
             >
               <p>{record?.transaction_type == "INC" ? "+" : "-"}</p>
-              <p>{record?.amount}</p>
+              <p>{record?.amount}₮</p>
             </div>
           </div>
         );

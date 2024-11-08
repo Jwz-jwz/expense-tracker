@@ -35,7 +35,9 @@ export const Header = ({ dashboard, records }) => {
       </div>
       <div className="flex items-center gap-6">
         {/* <PlusAdd /> */}
-        <AddRecord />
+        <div className="w-[90px] ">
+          <AddRecord text={"Record"} />
+        </div>
         <button onClick={LogOutButton} className="font-[600]">
           Log out
         </button>
