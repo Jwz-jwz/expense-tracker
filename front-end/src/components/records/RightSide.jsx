@@ -35,11 +35,51 @@ import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
 
 export const RightSide = ({ records, clickedCatName }) => {
+  const newDate = new Date();
+  const isToday = newDate.toISOString();
+  const formattedToday = isToday.split("T")[0];
+
+  const groupedRecords = records?.reduce((acc, record) => {
+    const formattedDate = new Date(record.date);
+    const day = formattedDate.getDate();
+    const month = formattedDate.getMonth() + 1;
+    const year = formattedDate.getFullYear();
+
+    const formattedDateString = `${year}-${month}-${day}`;
+
+    if (!acc[formattedDateString]) {
+      acc[formattedDateString] = [];
+    }
+    acc[formattedDateString].push(record);
+
+    return acc;
+  }, []);
+  // console.log(groupedRecords);
+
+  // const groupedRecords = records?.reduce((acc, record) => {
+  //   const formattedDate = new Date(record.date);
+  //   const day = formattedDate.getDate();
+  //   const month = formattedDate.getMonth() + 1;
+  //   const year = formattedDate.getFullYear();
+
+  //   const formattedDateString = `${year}-${month}-${day}`;
+
+  //   if (!acc[formattedDateString]) {
+  //     acc[formattedDateString] = {
+  //       date: formattedDateString,
+  //       data: [],
+  //     };
+  //   }
+  //   acc[formattedDateString].push(record);
+
+  //   return acc;
+  // }, []);
+
   let filteredRecords = [];
   if (!clickedCatName) {
-    filteredRecords = records;
+    filteredRecords = groupedRecords;
   } else {
-    filteredRecords = records?.filter(
+    filteredRecords = groupedRecords?.filter(
       (record) => record?.name === clickedCatName
     );
   }
@@ -94,47 +134,55 @@ export const RightSide = ({ records, clickedCatName }) => {
         </select>
       </div>
       <div className="flex flex-col gap-6">
+        {/* Loop through the grouped records */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-[16px] font-[600] leading-6 ">Today</h1>
-          {filteredRecords?.map((record, index) => {
+          {Object.keys(groupedRecords).map((date, index) => {
+            // Get the records for the current date
+            const recordsForDate = groupedRecords[date];
+
             return (
-              <div
-                key={index}
-                className="flex items-center justify-between px-6 py-4 bg-white rounded-[12px]"
-              >
-                <div className="flex gap-4">
-                  <div
-                    className="rounded-full w-10 h-10 flex justify-center items-center"
-                    style={{ backgroundColor: record.icon_color }}
-                  >
-                    {icon[record?.category_icon]}
-                  </div>
-                  <div className="flex flex-col gap-1 justify-center ">
-                    <p className="text-[16px] font-[400] leading-6">
-                      {record.name}
-                    </p>
-                    <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
-                      {record?.date}
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className={`flex items-center gap-2 ${
-                    record?.transaction_type == "INC"
-                      ? "text-[#84CC16]"
-                      : "text-[red]"
-                  }  text-[16px] font-[600] leading-6`}
-                >
-                  {/* <p>+</p> */}
-                  <p>{record.transaction_type == "INC" ? "+" : "-"}</p>
-                  <p className="number">{record?.amount}₮</p>
-                </div>
+              <div key={index}>
+                <h1 className="text-[16px] font-[600] leading-6">{date}</h1>
+                {recordsForDate.map((singleRecord, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between px-6 py-4 bg-white rounded-[12px]"
+                    >
+                      <div className="flex gap-4">
+                        <div
+                          className="rounded-full w-10 h-10 flex justify-center items-center"
+                          style={{ backgroundColor: singleRecord.icon_color }}
+                        >
+                          {icon[singleRecord?.category_icon]}
+                        </div>
+                        <div className="flex flex-col gap-1 justify-center ">
+                          <p className="text-[16px] font-[400] leading-6">
+                            {singleRecord.name}
+                          </p>
+                          <p className="text-[12px] font-[400] leading-4 text-[#6B7280]">
+                            {singleRecord?.date}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        className={`flex items-center gap-2 ${
+                          singleRecord?.transaction_type === "INC"
+                            ? "text-[#84CC16]"
+                            : "text-[red]"
+                        } text-[16px] font-[600] leading-6`}
+                      >
+                        <p>
+                          {singleRecord.transaction_type === "INC" ? "+" : "-"}
+                        </p>
+                        <p className="number">{singleRecord?.amount}₮</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             );
           })}
-        </div>
-        <div className="flex flex-col gap-3">
-          <h1 className="text-[16px] font-[600] leading-6 ">Yesterday</h1>
         </div>
       </div>
     </div>

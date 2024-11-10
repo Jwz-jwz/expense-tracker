@@ -72,8 +72,10 @@ export const Records = () => {
     setTransactionType(value);
   };
   const handleIcon = (name) => {
-    setClickedCatName(name, !isClicked);
+    setClickedCatName((prevName) => [...prevName, name]);
   };
+  console.log(clickedCatName);
+
   const handleClearButton = () => {
     setClickedCatName(!isClicked);
     setClickedCatName("");
