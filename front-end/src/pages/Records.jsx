@@ -74,7 +74,7 @@ export const Records = () => {
   const handleIcon = (name) => {
     setClickedCatName((prevName) => [...prevName, name]);
   };
-  console.log(clickedCatName);
+  // console.log(clickedCatName);
 
   const handleClearButton = () => {
     setClickedCatName(!isClicked);

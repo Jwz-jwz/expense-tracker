@@ -35,6 +35,8 @@ import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
 
 export const RightSide = ({ records, clickedCatName }) => {
+  // console.log(clickedCatName);
+
   const newDate = new Date();
   const isToday = newDate.toISOString();
   const formattedToday = isToday.split("T")[0];
@@ -54,6 +56,8 @@ export const RightSide = ({ records, clickedCatName }) => {
 
     return acc;
   }, []);
+
+  // withinRange
   // console.log(groupedRecords);
 
   // const groupedRecords = records?.reduce((acc, record) => {
@@ -74,15 +78,18 @@ export const RightSide = ({ records, clickedCatName }) => {
 
   //   return acc;
   // }, []);
+  console.log(clickedCatName);
 
   let filteredRecords = [];
-  if (!clickedCatName) {
+  if (clickedCatName.length == 0) {
     filteredRecords = groupedRecords;
   } else {
-    filteredRecords = groupedRecords?.filter(
-      (record) => record?.name === clickedCatName
-    );
+    filteredRecords = groupedRecords?.filter((record) => {
+      console.log(clickedCatName?.includes(record?.name));
+      return clickedCatName?.includes(record.name);
+    });
   }
+  // console.log(filteredRecords);
 
   const icon = {
     HomeIcon: <HomeIcon color={"#FFFFFF"} />,
@@ -136,12 +143,12 @@ export const RightSide = ({ records, clickedCatName }) => {
       <div className="flex flex-col gap-6">
         {/* Loop through the grouped records */}
         <div className="flex flex-col gap-3">
-          {Object.keys(groupedRecords).map((date, index) => {
+          {Object.keys(filteredRecords).map((date, index) => {
             // Get the records for the current date
             const recordsForDate = groupedRecords[date];
 
             return (
-              <div key={index}>
+              <div key={index} className="flex flex-col gap-3">
                 <h1 className="text-[16px] font-[600] leading-6">{date}</h1>
                 {recordsForDate.map((singleRecord, index) => {
                   return (
