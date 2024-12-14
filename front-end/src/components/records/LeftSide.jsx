@@ -1,8 +1,6 @@
 import { EyeIcon } from "@/svg/EyeIcon";
-import { PlusAdd } from "./PlusAdd";
 import { AddRecord } from "../AddRecord";
 import { AddCategory } from "./AddCategory";
-import { useState } from "react";
 import { NotEye } from "@/svg/NotEye";
 
 export const LeftSide = ({

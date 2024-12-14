@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 ``;
 
-export const SignInPage = () => {
+export default function SignInPage() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -127,4 +127,4 @@ export const SignInPage = () => {
       <div className="w-[50%] h-full bg-[#0166FF]"></div>
     </div>
   );
-};
+}

@@ -35,8 +35,6 @@ import { LeftSideicon } from "@/svg/LeftSideIcon";
 import { RightSideIcon } from "@/svg/RightSideIcon";
 
 export const RightSide = ({ records, clickedCatName }) => {
-  // console.log(clickedCatName);
-
   const newDate = new Date();
   const isToday = newDate.toISOString();
   const formattedToday = isToday.split("T")[0];

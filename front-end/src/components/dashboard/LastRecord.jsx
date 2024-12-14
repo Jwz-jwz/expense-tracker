@@ -60,15 +60,12 @@ export const Lastrecord = ({ dashboardRecords }) => {
     TwentyFourthIcon: <TwentyFourthIcon color={"#FFFFFF"} />,
     TwentyFifthIcon: <TwentyFifthIcon color={"#FFFFFF"} />,
     TwentySixthIcon: <TwentySixthIcon color={"#FFFFFF"} />,
-
     TwentySeventhIcon: <TwentySeventhIcon color={"#FFFFFF"} />,
-
     TwentyEighticon: <TwentyEighticon color={"#FFFFFF"} />,
     TwentyNinethIcon: <TwentyNinethIcon color={"#FFFFFF"} />,
     ThirtiethIcon: <ThirtiethIcon color={"#FFFFFF"} />,
   };
   const currentDate = new Date();
-  console.log(currentDate);
 
   return (
     <div className="w-[1200px] bg-white rounded-xl px-6">

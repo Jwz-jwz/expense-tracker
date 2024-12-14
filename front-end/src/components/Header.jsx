@@ -4,7 +4,6 @@ import { PlusIcon } from "@/svg/PlusIcon";
 import { AddRecord } from "./AddRecord";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { PlusAdd } from "./records/PlusAdd";
 
 export const Header = ({ dashboard, records }) => {
   const router = useRouter();
@@ -50,5 +49,3 @@ export const Header = ({ dashboard, records }) => {
     </div>
   );
 };
-
-// Background-color --> #F3F4F6

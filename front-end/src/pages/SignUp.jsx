@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
-export const SignUpPage = () => {
+export default function SignUpPage() {
   const router = useRouter();
   useState;
   const [errorMessage, setErrorMessage] = useState("");
@@ -55,7 +55,7 @@ export const SignUpPage = () => {
         } else {
           setErrorMessage(data.message || "Invalid credentials");
           toast.error("Please sign up");
-          router.push("/sign-up");          
+          router.push("/sign-up");
         }
       } catch (error) {
         setErrorMessage("Network error");
@@ -141,4 +141,4 @@ export const SignUpPage = () => {
       <div className="w-[50%] h-full bg-[#0166FF]"></div>
     </div>
   );
-};
+}

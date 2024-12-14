@@ -1,5 +1,5 @@
 import { Loading } from "@/components/Loading";
-import SignInPage from "./sign-in/page";
+import SignInPage from "@/pages/SignIn";
 
 export default function Home() {
   return (

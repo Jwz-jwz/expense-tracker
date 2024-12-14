@@ -4,8 +4,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 export const DoughnutChart = ({ dashboardRecords }) => {
-  // console.log(dashboardRecords);
-
   const data = {
     // labels: dashboardRecords?.map((record) => record?.name),
 

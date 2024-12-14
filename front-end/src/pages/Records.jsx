@@ -38,7 +38,7 @@ import { RightSide } from "@/components/records/RightSide";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 import { useEffect, useState } from "react";
 
-export const Records = () => {
+export default function Records() {
   const [category, setCategory] = useState([]);
   const [records, setRecords] = useState([]);
   const [transactionType, setTransactionType] = useState("ALL");
@@ -159,4 +159,4 @@ export const Records = () => {
       </div>
     </div>
   );
-};
+}

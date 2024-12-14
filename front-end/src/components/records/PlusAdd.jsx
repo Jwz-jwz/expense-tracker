@@ -1,9 +1,7 @@
 "use client";
 
-import { CategoryArrow } from "@/svg/CategoryArrow";
 import { WhitePlusIcon } from "@/svg/WhitePlusIcon";
 import { useState } from "react";
-import { AddCategory } from "./AddCategory";
 
 export const PlusAdd = ({ text }) => {
   const [isClicked, setIsClicked] = useState(true);

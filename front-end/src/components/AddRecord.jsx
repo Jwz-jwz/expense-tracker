@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { WhitePlusIcon } from "../svg/WhitePlusIcon";
-import { CategoryArrow } from "@/svg/CategoryArrow";
-import { AddCategory } from "./records/AddCategory";
-import { IconArrow } from "./records/IconArrow";
 import { BACKEND_ENDPOINT } from "@/constants/constant";
 
 export const AddRecord = ({ colors, icons, setRecords, text }) => {
